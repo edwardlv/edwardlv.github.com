@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+    <meta name="description" content="查询某个端口号被什么进程占用lsof -i:8080netstat -nlplsof -Pnl +M -i4# -P :这个选项约束着网络文件的端口号到端口名称的转换。约束转换可以使lsof运行得更快一些。# -n : 这个选项约束着网络文件的端口号到主机名称的转换。约束转换可以使lsof的运行更快一些。在主机名称的查找不能奏效时，它非常有用。# -l :这个选项约束着用户ID号到登录名的转换。在">
+  
+  <meta name="description" content="查询某个端口号被什么进程占用lsof -i:8080netstat -nlplsof -Pnl +M -i4# -P :这个选项约束着网络文件的端口号到端口名称的转换。约束转换可以使lsof运行得更快一些。# -n : 这个选项约束着网络文件的端口号到主机名称的转换。约束转换可以使lsof的运行更快一些。在主机名称的查找不能奏效时，它非常有用。# -l :这个选项约束着用户ID号到登录名的转换。在">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Code says.">
+<meta property="og:url" content="http://edwardlv.github.io/note/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="查询某个端口号被什么进程占用lsof -i:8080netstat -nlplsof -Pnl +M -i4# -P :这个选项约束着网络文件的端口号到端口名称的转换。约束转换可以使lsof运行得更快一些。# -n : 这个选项约束着网络文件的端口号到主机名称的转换。约束转换可以使lsof的运行更快一些。在主机名称的查找不能奏效时，它非常有用。# -l :这个选项约束着用户ID号到登录名的转换。在">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Code says.">
+<meta name="twitter:description" content="查询某个端口号被什么进程占用lsof -i:8080netstat -nlplsof -Pnl +M -i4# -P :这个选项约束着网络文件的端口号到端口名称的转换。约束转换可以使lsof运行得更快一些。# -n : 这个选项约束着网络文件的端口号到主机名称的转换。约束转换可以使lsof的运行更快一些。在主机名称的查找不能奏效时，它非常有用。# -l :这个选项约束着用户ID号到登录名的转换。在">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="page">
+  <header>
+    
+    
+  
+    <h1 class="title"></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>查询某个端口号被什么进程占用<br><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line">lsof -i:<span class="number">8080</span></span><br><span class="line">netstat -nlp</span><br><span class="line">lsof -Pnl +M -i4</span><br><span class="line"><span class="preprocessor"># -P :这个选项约束着网络文件的端口号到端口名称的转换。约束转换可以使lsof运行得更快一些。</span></span><br><span class="line"><span class="preprocessor"># -n : 这个选项约束着网络文件的端口号到主机名称的转换。约束转换可以使lsof的运行更快一些。在主机名称的查找不能奏效时，它非常有用。</span></span><br><span class="line"><span class="preprocessor"># -l :这个选项约束着用户ID号到登录名的转换。在登录名的查找不正确或很慢时，这个选项就很有用。</span></span><br><span class="line"><span class="preprocessor"># +M :此选项支持本地TCP和UDP端口映射程序的注册报告。</span></span><br><span class="line"><span class="preprocessor"># -i4 : 仅列示IPv4协议下的端口。</span></span><br></pre></td></tr></table></figure></p>
+<p>git常用数据统计<br><figure class="highlight stata"><table><tr><td class="code"><pre><span class="line">统计某人的代码提交量，包括增加，删除：</span><br><span class="line">git <span class="keyword">log</span> --author=<span class="string">"$(git config --get user.name)" --pretty=tformat: --numstat | gawk '&#123; add += $1 ; subs += $2 ; loc += $1 - $2 &#125; END &#123; printf "added lines: %s removed lines : %s total lines: %s\n"</span>,add,subs,<span class="keyword">loc</span> &#125;' -</span><br><span class="line">仓库提交者排名前 5（如果看全部，去掉 head 管道即可）：</span><br><span class="line">git <span class="keyword">log</span> --pretty='%<span class="keyword">aN</span>' | <span class="keyword">sort</span> | uniq -c | <span class="keyword">sort</span> -k1 -<span class="keyword">n</span> -r | head -<span class="keyword">n</span> 5</span><br><span class="line">仓库提交者（邮箱）排名前 5：这个统计可能不会太准，因为很多人有不同的邮箱，但会使用相同的名字</span><br><span class="line">git <span class="keyword">log</span> --pretty=<span class="keyword">format</span>:%ae | gawk -- '&#123; ++c[$0]; &#125; END &#123; <span class="keyword">for</span>(<span class="keyword">cc</span> <span class="keyword">in</span> c) printf <span class="string">"%5d %s\n"</span>,c[<span class="keyword">cc</span>],<span class="keyword">cc</span>; &#125;' | <span class="keyword">sort</span> -<span class="keyword">u</span> -<span class="keyword">n</span> -r | head -<span class="keyword">n</span> 5 </span><br><span class="line">贡献者统计：</span><br><span class="line">git <span class="keyword">log</span> --pretty='%<span class="keyword">aN</span>' | <span class="keyword">sort</span> -<span class="keyword">u</span> | wc -<span class="keyword">l</span></span><br><span class="line">提交数统计：</span><br><span class="line">git <span class="keyword">log</span> --oneline | wc -<span class="keyword">l</span> </span><br><span class="line">添加或修改的代码行数：</span><br><span class="line">git <span class="keyword">log</span> --stat|perl -ne 'END &#123; <span class="keyword">print</span> <span class="label">$c</span> &#125; <span class="label">$c</span> += $1 <span class="keyword">if</span> /(\<span class="keyword">d</span>+) insertions/;'</span><br></pre></td></tr></table></figure></p>
+<p>xmpp服务器http接口是否正确运行:<br><figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">/http-<span class="keyword">bind</span>/?&lt;body<span class="variable">%20rid</span>=<span class="string">"2"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>tcpdump读取网络请求:<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">tcpdump -i lo0 -A -s 0 -lq  dst port 5222 or src port 5222&#10;# i: network interface&#10;# A: print in ASCII&#10;# s: Snarf _snaplen_ bytes of data from each packet&#10;# l: print by line&#10;# q: Print less protocol information</span><br></pre></td></tr></table></figure></p>
+<p>git 回滚:<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">git reset --hard &#29256;&#26412;&#21495;&#10;# &#22914;&#26524;&#24403;&#21069;&#29256;&#26412;&#24050;&#32463;push, &#36824;&#38656;&#35201;&#23558;reset push&#21040;&#36828;&#31243;&#10;git push -f</span><br></pre></td></tr></table></figure></p>
+<p>git 恢复本地文件:<br><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">git checkout path/<span class="keyword">to</span>/your/<span class="type">file</span></span><br></pre></td></tr></table></figure></p>
+<p>git 本地修改:<br><figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">reset</span> -- .      <span class="comment"># 从暂存区恢复到工作文件 (放弃add操作)  </span></span><br><span class="line">git <span class="keyword">reset</span> --hard    <span class="comment"># 恢复最近一次提交过的状态，即放弃上次提交后的所有本次修改 (放弃修改)</span></span><br></pre></td></tr></table></figure></p>
+<p>grep ignore mutiline<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tail <span class="operator">-f</span> your\_input | sed -n <span class="string">'/your\_ignore_line/,+5!p'</span></span><br><span class="line">tail <span class="operator">-f</span> your_input | awk -v nlines=<span class="number">5</span> <span class="string">'/localhost/ &#123;for (i=0; i&lt;\nlines; i++) &#123;getline&#125;; next&#125; 1'</span></span><br></pre></td></tr></table></figure></p>
+<p>git 只更新新版本某个文件<br><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">git fetch</span><br><span class="line">git checkout origin/master path/<span class="keyword">to</span>/<span class="type">file</span></span><br></pre></td></tr></table></figure></p>
+<p>awk 去除头尾空格<br><figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">echo <span class="string">"    a bc    "</span> <span class="string">| awk 'gsub(/^ *| *$</span>/,<span class="string">""</span>)'</span><br><span class="line">// ^ <span class="keyword">*</span>表示行首空格</span><br><span class="line">// <span class="keyword">*</span>$表示行尾空格</span><br><span class="line">// ^ <span class="keyword">*</span><span class="string">| *$</span>表示行首或行尾空格</span><br></pre></td></tr></table></figure></p>
+<p>修改centos系统时区<br><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">cp <span class="regexp">/usr/</span>share<span class="regexp">/zoneinfo/</span>Asia<span class="regexp">/Shanghai /</span>etc<span class="regexp">/localtime</span></span><br></pre></td></tr></table></figure></p>
+<p>mac下获得PID的真实路径<br><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ps</span> ux -<span class="keyword">p</span> pid | <span class="keyword">grep</span> -<span class="keyword">v</span> <span class="string">'PID'</span> | <span class="string">'/'</span>之后所有</span><br><span class="line">lsof -<span class="keyword">p</span> <span class="number">452</span> -Fn | awk <span class="string">'NR==3&#123;print&#125;'</span> | sed <span class="string">"s/n\//\//"</span></span><br></pre></td></tr></table></figure></p>
+<p>How to grep-inverse-match and exclude “before” and “after” lines<br><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"><span class="keyword">grep</span> -vFf - <span class="keyword">file</span>.txt &lt; &lt;(<span class="keyword">grep</span> -B2 -A1 <span class="string">'fff'</span> <span class="keyword">file</span>.txt)</span><br></pre></td></tr></table></figure></p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="">
+  </div>
+</section>
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
+      </li>
+    
+      <li>
+        <a href="/2014/10/14/hello-world/">Hello World</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

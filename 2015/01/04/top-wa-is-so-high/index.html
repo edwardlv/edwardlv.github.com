@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>top中, wa长期100% | Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+    <meta name="description" content="Staging测试服务器, 每次登陆上去都感到隐隐约约的蛋疼. 今天下午的登陆已经不能用蛋疼来形容了. top后发现:Cpu(s):  0.3%us,  0.0%sy,  0.0%ni,  0.0%id, 99.3%wa,  0.0%hi,  0.0%si,  0.3%st
+
+wa: Percentage of time that the CPU or CPUs were idle during">
+  
+  <meta name="description" content="Staging测试服务器, 每次登陆上去都感到隐隐约约的蛋疼. 今天下午的登陆已经不能用蛋疼来形容了. top后发现:Cpu(s):  0.3%us,  0.0%sy,  0.0%ni,  0.0%id, 99.3%wa,  0.0%hi,  0.0%si,  0.3%st
+
+wa: Percentage of time that the CPU or CPUs were idle during">
+<meta property="og:type" content="article">
+<meta property="og:title" content="top中, wa长期100%">
+<meta property="og:url" content="http://edwardlv.github.io/2015/01/04/top-wa-is-so-high/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="Staging测试服务器, 每次登陆上去都感到隐隐约约的蛋疼. 今天下午的登陆已经不能用蛋疼来形容了. top后发现:Cpu(s):  0.3%us,  0.0%sy,  0.0%ni,  0.0%id, 99.3%wa,  0.0%hi,  0.0%si,  0.3%st
+
+wa: Percentage of time that the CPU or CPUs were idle during">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="top中, wa长期100%">
+<meta name="twitter:description" content="Staging测试服务器, 每次登陆上去都感到隐隐约约的蛋疼. 今天下午的登陆已经不能用蛋疼来形容了. top后发现:Cpu(s):  0.3%us,  0.0%sy,  0.0%ni,  0.0%id, 99.3%wa,  0.0%hi,  0.0%si,  0.3%st
+
+wa: Percentage of time that the CPU or CPUs were idle during">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/01/04/top-wa-is-so-high/">
+  <time datetime="2015-01-04T10:37:57.000Z">
+    1月 4 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">top中, wa长期100%</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>Staging测试服务器, 每次登陆上去都感到隐隐约约的蛋疼. 今天下午的登陆已经不能用蛋疼来形容了. <code>top</code>后发现:<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cpu(s):  0.3%us,  0.0%sy,  0.0%ni,  0.0%id, 99.3%wa,  0.0%hi,  0.0%si,  0.3%st</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>wa: Percentage of time that the CPU or CPUs were idle during which the system had an outstanding disk I/O request.<br>wa: 等待输入输出的CPU时间百分比</p>
+</blockquote>
+<p>wa为io wait, 常见比如: 访问本机mysql的sql(排除网络io), 返回结果前cpu等待结果, 这个过程cpu处于io wait状态. wa过高, 又两种可能1. 机器io出现问题. 2. 硬盘出现故障.<br><a id="more"></a><br>为确认硬盘是否有故障, 有如下几个命令, 可以查看详情:<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">vmstat 1&#10;iostat -dex 1&#10;mpstat -P ALL 1</span><br></pre></td></tr></table></figure></p>
+<p>3条命令的执行结果如下:<br><figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#### vmstat 1 ####</span></span><br><span class="line">procs -----------memory---------- ---swap-- -----io---- -<span class="keyword">system</span>-- ----cpu----</span><br><span class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa</span><br><span class="line"> <span class="number">0</span>  <span class="number">1</span> <span class="number">456192</span>  <span class="number">58260</span>   <span class="number">2300</span>  <span class="number">23744</span>   <span class="number">12</span>    <span class="number">0</span>   <span class="number">344</span>   <span class="number">100</span>  <span class="number">345</span>  <span class="number">522</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span></span><br><span class="line"> <span class="number">0</span>  <span class="number">1</span> <span class="number">456168</span>  <span class="number">58880</span>   <span class="number">2300</span>  <span class="number">23324</span>   <span class="number">36</span>    <span class="number">0</span>    <span class="number">36</span>     <span class="number">0</span>  <span class="number">307</span>  <span class="number">494</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span></span><br><span class="line"> <span class="number">0</span>  <span class="number">1</span> <span class="number">456164</span>  <span class="number">56152</span>   <span class="number">2300</span>  <span class="number">26132</span>    <span class="number">8</span>    <span class="number">0</span>  <span class="number">3296</span>     <span class="number">0</span>  <span class="number">433</span>  <span class="number">559</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span></span><br><span class="line"> <span class="number">0</span>  <span class="number">1</span> <span class="number">456160</span>  <span class="number">56772</span>   <span class="number">2284</span>  <span class="number">25672</span>    <span class="number">4</span>    <span class="number">0</span>     <span class="number">4</span>     <span class="number">0</span>  <span class="number">305</span>  <span class="number">481</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span></span><br><span class="line"> <span class="number">0</span>  <span class="number">1</span> <span class="number">456128</span>  <span class="number">58632</span>   <span class="number">1876</span>  <span class="number">24700</span>   <span class="number">68</span>    <span class="number">0</span>    <span class="number">68</span>     <span class="number">0</span>  <span class="number">321</span>  <span class="number">492</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span></span><br><span class="line"> <span class="number">0</span>  <span class="number">1</span> <span class="number">456124</span>  <span class="number">59252</span>   <span class="number">1876</span>  <span class="number">24248</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>  <span class="number">304</span>  <span class="number">479</span>  <span class="number">0</span>  <span class="number">1</span>  <span class="number">0</span> <span class="number">99</span></span><br><span class="line"> <span class="number">0</span>  <span class="number">1</span> <span class="number">456120</span>  <span class="number">59996</span>   <span class="number">1492</span>  <span class="number">24120</span>    <span class="number">0</span>    <span class="number">0</span>     <span class="number">0</span>     <span class="number">0</span>  <span class="number">315</span>  <span class="number">474</span>  <span class="number">1</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">99</span></span><br><span class="line"> <span class="number">0</span>  <span class="number">1</span> <span class="number">456116</span>  <span class="number">60492</span>   <span class="number">1492</span>  <span class="number">23764</span>    <span class="number">4</span>    <span class="number">0</span>     <span class="number">4</span>     <span class="number">0</span>  <span class="number">297</span>  <span class="number">456</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span></span><br><span class="line"> <span class="number">0</span>  <span class="number">1</span> <span class="number">455824</span>  <span class="number">60740</span>   <span class="number">1492</span>  <span class="number">23344</span>  <span class="number">420</span>    <span class="number">0</span>   <span class="number">420</span>     <span class="number">0</span>  <span class="number">384</span>  <span class="number">631</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> <span class="number">100</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#### iostat -dx 1 #### util，svctm，硬盘好像没问题 </span></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">0</span>.<span class="number">00</span>     <span class="number">0</span>.<span class="number">00</span>   <span class="number">15.00</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">132.00</span>     <span class="number">0</span>.<span class="number">00</span>    <span class="number">17.60</span>     <span class="number">0</span>.<span class="number">03</span>    <span class="number">1.87</span>    <span class="number">1.87</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">53</span>   <span class="number">0</span>.<span class="number">80</span></span><br><span class="line"></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">0</span>.<span class="number">00</span>     <span class="number">4.95</span>    <span class="number">2.97</span>    <span class="number">2.97</span>    <span class="number">11.88</span>    <span class="number">31.68</span>    <span class="number">14.67</span>     <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">67</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">1.33</span>   <span class="number">0</span>.<span class="number">67</span>   <span class="number">0</span>.<span class="number">40</span></span><br><span class="line"></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">0</span>.<span class="number">00</span>    <span class="number">43.43</span>    <span class="number">3.03</span>   <span class="number">26.26</span>    <span class="number">12.12</span>   <span class="number">258.59</span>    <span class="number">18.48</span>     <span class="number">0</span>.<span class="number">06</span>    <span class="number">1.93</span>    <span class="number">2.67</span>    <span class="number">1.85</span>   <span class="number">0</span>.<span class="number">97</span>   <span class="number">2.83</span></span><br><span class="line"></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">0</span>.<span class="number">00</span>   <span class="number">290.00</span>    <span class="number">5.00</span>   <span class="number">76.00</span>    <span class="number">20.00</span>  <span class="number">1484.00</span>    <span class="number">37.14</span>     <span class="number">0</span>.<span class="number">32</span>    <span class="number">4.05</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">4.32</span>   <span class="number">0</span>.<span class="number">99</span>   <span class="number">8.00</span></span><br><span class="line"></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">0</span>.<span class="number">00</span>     <span class="number">0</span>.<span class="number">00</span>   <span class="number">24.24</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">96.97</span>     <span class="number">0</span>.<span class="number">00</span>     <span class="number">8.00</span>     <span class="number">0</span>.<span class="number">04</span>    <span class="number">1.67</span>    <span class="number">1.67</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">33</span>   <span class="number">0</span>.<span class="number">81</span></span><br><span class="line"></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">0</span>.<span class="number">00</span>     <span class="number">0</span>.<span class="number">00</span>    <span class="number">8.08</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">307.07</span>     <span class="number">0</span>.<span class="number">00</span>    <span class="number">76.00</span>     <span class="number">0</span>.<span class="number">02</span>    <span class="number">2.00</span>    <span class="number">2.00</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">1.00</span>   <span class="number">0</span>.<span class="number">81</span></span><br><span class="line"></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">0</span>.<span class="number">00</span>     <span class="number">0</span>.<span class="number">00</span>   <span class="number">31.00</span>    <span class="number">1.00</span>   <span class="number">780.00</span>    <span class="number">16.00</span>    <span class="number">49.75</span>     <span class="number">0</span>.<span class="number">04</span>    <span class="number">1.12</span>    <span class="number">1.16</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">38</span>   <span class="number">1.20</span></span><br><span class="line"></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">0</span>.<span class="number">00</span>     <span class="number">0</span>.<span class="number">00</span>    <span class="number">5.10</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">20.41</span>     <span class="number">0</span>.<span class="number">00</span>     <span class="number">8.00</span>     <span class="number">0</span>.<span class="number">03</span>    <span class="number">6.40</span>    <span class="number">6.40</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">1.60</span>   <span class="number">0</span>.<span class="number">82</span></span><br><span class="line"></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">0</span>.<span class="number">00</span>     <span class="number">0</span>.<span class="number">00</span>    <span class="number">1.00</span>    <span class="number">0</span>.<span class="number">00</span>     <span class="number">4.00</span>     <span class="number">0</span>.<span class="number">00</span>     <span class="number">8.00</span>     <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">00</span>   <span class="number">0</span>.<span class="number">00</span></span><br><span class="line"></span><br><span class="line">Device:         rrqm/<span class="keyword">s</span>   wrqm/<span class="keyword">s</span>     r/<span class="keyword">s</span>     w/<span class="keyword">s</span>    rkB/<span class="keyword">s</span>    wkB/<span class="keyword">s</span> avgrq-sz avgqu-sz   await r_await w_await  svctm  <span class="variable">%util</span></span><br><span class="line">xvda              <span class="number">3.03</span>     <span class="number">3.03</span>  <span class="number">210.10</span>    <span class="number">3.03</span>   <span class="number">933.33</span>    <span class="number">24.24</span>     <span class="number">8.99</span>     <span class="number">0</span>.<span class="number">53</span>    <span class="number">2.50</span>    <span class="number">2.52</span>    <span class="number">1.33</span>   <span class="number">0</span>.<span class="number">36</span>   <span class="number">7.68</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">##### mpstat -P ALL 1 #####</span></span><br><span class="line"><span class="number">05</span>:<span class="number">30</span>:<span class="number">33</span> PM  CPU    <span class="variable">%usr</span>   <span class="variable">%nice</span>    <span class="variable">%sys</span> <span class="variable">%iowait</span>    <span class="variable">%irq</span>   <span class="variable">%soft</span>  <span class="variable">%steal</span>  <span class="variable">%guest</span>   <span class="variable">%idle</span></span><br><span class="line"><span class="number">05</span>:<span class="number">30</span>:<span class="number">34</span> PM  all    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">98.95</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">1.05</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span></span><br><span class="line"><span class="number">05</span>:<span class="number">30</span>:<span class="number">34</span> PM    <span class="number">0</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">98.95</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">1.05</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span></span><br><span class="line"></span><br><span class="line"><span class="number">05</span>:<span class="number">30</span>:<span class="number">34</span> PM  CPU    <span class="variable">%usr</span>   <span class="variable">%nice</span>    <span class="variable">%sys</span> <span class="variable">%iowait</span>    <span class="variable">%irq</span>   <span class="variable">%soft</span>  <span class="variable">%steal</span>  <span class="variable">%guest</span>   <span class="variable">%idle</span></span><br><span class="line"><span class="number">05</span>:<span class="number">30</span>:<span class="number">35</span> PM  all    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>  <span class="number">100.00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span></span><br><span class="line"><span class="number">05</span>:<span class="number">30</span>:<span class="number">35</span> PM    <span class="number">0</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>  <span class="number">100.00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span></span><br><span class="line"></span><br><span class="line"><span class="number">05</span>:<span class="number">30</span>:<span class="number">35</span> PM  CPU    <span class="variable">%usr</span>   <span class="variable">%nice</span>    <span class="variable">%sys</span> <span class="variable">%iowait</span>    <span class="variable">%irq</span>   <span class="variable">%soft</span>  <span class="variable">%steal</span>  <span class="variable">%guest</span>   <span class="variable">%idle</span></span><br><span class="line"><span class="number">05</span>:<span class="number">30</span>:<span class="number">36</span> PM  all    <span class="number">1.02</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">98.98</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span></span><br><span class="line"><span class="number">05</span>:<span class="number">30</span>:<span class="number">36</span> PM    <span class="number">0</span>    <span class="number">1.02</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>   <span class="number">98.98</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span>    <span class="number">0</span>.<span class="number">00</span></span><br></pre></td></tr></table></figure></p>
+<p><code>ostat -dx 1</code>, util, svctm两个参数正常, 表明硬盘没有问题. <code>vmstat 1</code>, si参数表明, 机器有明显的swap. </p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">$ free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line"><span class="string">Mem:</span>           <span class="number">994</span>        <span class="number">854</span>        <span class="number">140</span>          <span class="number">0</span>          <span class="number">3</span>         <span class="number">29</span></span><br><span class="line">-<span class="regexp">/+ buffers/</span><span class="string">cache:</span>        <span class="number">820</span>        <span class="number">173</span></span><br><span class="line"><span class="string">Swap:</span>         <span class="number">1023</span>        <span class="number">471</span>        <span class="number">552</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="title">sysctl</span> vm.swappiness=<span class="number">1</span> <span class="comment"># 设置swappiness</span></span><br></pre></td></tr></table></figure>
+<p><code>avgrq-sz</code>偏大. </p>
+<blockquote>
+<p>avgrq-sz: The average size (in sectors) of the requests that were issued to the device.</p>
+</blockquote>
+<p>另外,<br><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sysctl -<span class="keyword">a</span> | <span class="keyword">grep</span> <span class="keyword">vm</span>.dirty</span><br><span class="line"><span class="keyword">vm</span>.dirty_background_ratio = <span class="number">10</span></span><br><span class="line"><span class="keyword">vm</span>.dirty_background_bytes = <span class="number">0</span></span><br><span class="line"><span class="keyword">vm</span>.dirty_ratio = <span class="number">20</span></span><br><span class="line"><span class="keyword">vm</span>.dirty_bytes = <span class="number">0</span></span><br><span class="line"><span class="keyword">vm</span>.dirty_writeback_centisecs = <span class="number">500</span></span><br><span class="line"><span class="keyword">vm</span>.dirty_expire_centisecs = <span class="number">3000</span></span><br></pre></td></tr></table></figure></p>
+<p>综合分析后, 最有可能原因是: 内存太小, 系统中大量的swap. </p>
+<p>参考<a href="http://huoding.com/2012/11/08/198" target="_blank" rel="external">SWAP的罪与罚</a>, top命令中的<code>SWAP</code>不可信, 需要<code>top-&gt;f-&gt;nFLT-&gt;enter-&gt;shift+o-&gt;选择排序项</code>.</p>
+<p>至此, 可以通过按照内存排序&amp;按照nFLT倒序, 一次查找占用最大的进程. </p>
+<h2 id="具体措施">具体措施</h2><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">nginx-&gt;worker-&gt;<span class="number">1</span></span><br><span class="line">unicorn-&gt;worker-&gt;<span class="number">1</span></span><br><span class="line">ulimit -s <span class="number">1024</span></span><br><span class="line">sidekiq restart</span><br></pre></td></tr></table></figure>
+<p>wa终于开始换换下降. 剧终. thx to <a href="http://huoding.com" target="_blank" rel="external">火丁笔记</a></p>
+<h2 id="参考文献:">参考文献:</h2><p><a href="http://blog.csdn.net/tianlesoftware/article/details/6197783" target="_blank" rel="external">top详解</a><br><a href="http://huoding.com/2011/08/19/107" target="_blank" rel="external">MongoDB与内存</a><br><a href="http://huoding.com/2012/11/08/198" target="_blank" rel="external">SWAP的罪与罚</a><br><a href="http://www.cnblogs.com/mfryf/archive/2012/03/15/2397729.html" target="_blank" rel="external">iostat</a><br><a href="https://lonesysadmin.net/2013/12/22/better-linux-disk-caching-performance-vm-dirty_ratio/" target="_blank" rel="external">vm.dirty</a><br><a href="http://emuch.net/html/200908/1494481.html" target="_blank" rel="external">top详解</a></p>
+<p>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/tech/">tech</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/iostat/">iostat</a>, <a class="tags-link" href="/tags/swap/">swap</a>, <a class="tags-link" href="/tags/top/">top</a>, <a class="tags-link" href="/tags/vmstat/">vmstat</a>, <a class="tags-link" href="/tags/wa/">wa</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="top中, wa长期100%">
+  </div>
+</section>
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
+      </li>
+    
+      <li>
+        <a href="/2014/10/14/hello-world/">Hello World</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

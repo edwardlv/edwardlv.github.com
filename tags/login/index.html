@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+  <meta name="description" content="码出我天地.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Code says.">
+<meta property="og:url" content="http://edwardlv.github.io/tags/login/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="码出我天地.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Code says.">
+<meta name="twitter:description" content="码出我天地.">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/15/Design-login-system/">
+  <time datetime="2014-11-15T09:22:40.000Z">
+    11月 15 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/15/Design-login-system/">如何设计登录系统</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>本文主要翻译了<a href="http://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication?lq=1">参考文献1</a>. </p>
+<h1 id="一个好的登录系统主要包含哪些模块?">一个好的登录系统主要包含哪些模块?</h1><ol>
+<li>如何登录</li>
+<li>如何保持登录状态</li>
+<li>如何存储密码</li>
+<li>采用密码问答</li>
+<li>忘记用户名/密码模块</li>
+<li>OpenId</li>
+<li>下一次, 如何免登录</li>
+<li>浏览器自动完成用户名&amp;密码</li>
+<li>secret Urls</li>
+<li>检查密码强度</li>
+<li>Email验证</li>
+</ol>
+<h1 id="分模块解析">分模块解析</h1><h3 id="如何登录">如何登录</h3><ol>
+<li>首先明确captcha和recaptcha的区别. 这两者都比较损伤用户体验, 推荐作为保留手段. 对比captcha, recaptcha对于机器更难识别, 相对好点. </li>
+<li>浏览器<em>自动提示功能</em>虽然可以关闭. 但是用户不同网站有很多账户, 可能会忘记那么多账户&amp;密码.</li>
+<li>对于网络嗅探, 一定使用基于加密(ssl) 或者 proven &amp; tested challenge-response scheme (for example, the Diffie-Hellman-based SRP) 的方式. 其他任何其他方式都会被黑客中间窃听. 仅仅基于客户端的加密方式也是无效的, 除非结合上述两种方法. 哈希密码, 可以有效防止密码明文泄露, 但是无法防止重放攻击, 中间人攻击/劫持, 暴力破解(username, salt, hashed password). </li>
+<li>发送完认证token后, 服务器端必须存储session记录用户已经被授权. cookie可以存储用户session的索引. Cookie必须有secure flag 和 Http only flag. httponly flag防止cookie被作为xss攻击. secure flag可以保证cookie仅通过 https 发送回来. cookie必须不可预知. 当cookie指向一个不存在的session时, cookie的值需要立刻被重置, 防止 session fixation.
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/11/15/Design-login-system/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
+      </li>
+    
+      <li>
+        <a href="/2014/10/14/hello-world/">Hello World</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

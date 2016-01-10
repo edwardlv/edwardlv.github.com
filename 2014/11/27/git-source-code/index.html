@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Git源码导读 | Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+    <meta name="description" content="Git是Linux的大作, 其实第一版的代码, 仅1k多行. 但是git的基本功能却也都在其中, 是非常值得学习的源码, 而且工程量也不大. 
+下载源码git clone https://github.com/git/git.git&amp;#10;git tag -l&amp;#10;# &amp;#36873;&amp;#25321; v0.99&amp;#29256;&amp;#10;git checkout v0.99&amp;#10;git">
+  
+  <meta name="description" content="Git是Linux的大作, 其实第一版的代码, 仅1k多行. 但是git的基本功能却也都在其中, 是非常值得学习的源码, 而且工程量也不大. 
+下载源码git clone https://github.com/git/git.git&amp;#10;git tag -l&amp;#10;# &amp;#36873;&amp;#25321; v0.99&amp;#29256;&amp;#10;git checkout v0.99&amp;#10;git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git源码导读">
+<meta property="og:url" content="http://edwardlv.github.io/2014/11/27/git-source-code/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="Git是Linux的大作, 其实第一版的代码, 仅1k多行. 但是git的基本功能却也都在其中, 是非常值得学习的源码, 而且工程量也不大. 
+下载源码git clone https://github.com/git/git.git&amp;#10;git tag -l&amp;#10;# &amp;#36873;&amp;#25321; v0.99&amp;#29256;&amp;#10;git checkout v0.99&amp;#10;git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git源码导读">
+<meta name="twitter:description" content="Git是Linux的大作, 其实第一版的代码, 仅1k多行. 但是git的基本功能却也都在其中, 是非常值得学习的源码, 而且工程量也不大. 
+下载源码git clone https://github.com/git/git.git&amp;#10;git tag -l&amp;#10;# &amp;#36873;&amp;#25321; v0.99&amp;#29256;&amp;#10;git checkout v0.99&amp;#10;git">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/27/git-source-code/">
+  <time datetime="2014-11-27T07:51:09.000Z">
+    11月 27 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">Git源码导读</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>Git是Linux的大作, 其实第一版的代码, 仅1k多行. 但是git的基本功能却也都在其中, 是非常值得学习的源码, 而且工程量也不大. </p>
+<h3 id="下载源码">下载源码</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/git/git.git&#10;git tag -l&#10;# &#36873;&#25321; v0.99&#29256;&#10;git checkout v0.99&#10;git log &#10;# &#36873;&#25321;&#26368;&#26032;&#30340;&#19968;&#20010;&#29256;&#26412;&#10;git reset e83c5163316f89bfbde7d9ab23ca2e25604af290&#10;git add .&#10;git reset --hard</span><br></pre></td></tr></table></figure>
+<h3 id="源码结构">源码结构</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">Makefile&#10;README&#10;cache.h&#10;cat-file.c&#10;commit-tree.c&#10;init-db.c&#10;read-cache.c&#10;read-tree.c&#10;show-diff.c&#10;update-cache.c&#10;write-tree.c</span><br></pre></td></tr></table></figure>
+<h3 id="init-db-c"><code>init-db.c</code></h3><blockquote>
+</blockquote>
+<p>参考文献:<br><a href="http://blog.csdn.net/gsyzhu/article/details/38065765" target="_blank" rel="external">http://blog.csdn.net/gsyzhu/article/details/38065765</a><br>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="Git源码导读">
+  </div>
+</section>
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
+      </li>
+    
+      <li>
+        <a href="/2014/10/14/hello-world/">Hello World</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

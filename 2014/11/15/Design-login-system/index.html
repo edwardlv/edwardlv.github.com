@@ -1,0 +1,358 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>如何设计登录系统 | Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+    <meta name="description" content="本文主要翻译了参考文献1. 
+一个好的登录系统主要包含哪些模块?
+如何登录
+如何保持登录状态
+如何存储密码
+采用密码问答
+忘记用户名/密码模块
+OpenId
+下一次, 如何免登录
+浏览器自动完成用户名&amp;amp;密码
+secret Urls
+检查密码强度
+Email验证
+
+分模块解析如何登录
+首先明确captcha和recaptcha的区别. 这两者都比较损伤用户体验, 推荐作为保留手段. 对比ca">
+  
+  <meta name="description" content="本文主要翻译了参考文献1. 
+一个好的登录系统主要包含哪些模块?
+如何登录
+如何保持登录状态
+如何存储密码
+采用密码问答
+忘记用户名/密码模块
+OpenId
+下一次, 如何免登录
+浏览器自动完成用户名&amp;amp;密码
+secret Urls
+检查密码强度
+Email验证
+
+分模块解析如何登录
+首先明确captcha和recaptcha的区别. 这两者都比较损伤用户体验, 推荐作为保留手段. 对比ca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何设计登录系统">
+<meta property="og:url" content="http://edwardlv.github.io/2014/11/15/Design-login-system/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="本文主要翻译了参考文献1. 
+一个好的登录系统主要包含哪些模块?
+如何登录
+如何保持登录状态
+如何存储密码
+采用密码问答
+忘记用户名/密码模块
+OpenId
+下一次, 如何免登录
+浏览器自动完成用户名&amp;amp;密码
+secret Urls
+检查密码强度
+Email验证
+
+分模块解析如何登录
+首先明确captcha和recaptcha的区别. 这两者都比较损伤用户体验, 推荐作为保留手段. 对比ca">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何设计登录系统">
+<meta name="twitter:description" content="本文主要翻译了参考文献1. 
+一个好的登录系统主要包含哪些模块?
+如何登录
+如何保持登录状态
+如何存储密码
+采用密码问答
+忘记用户名/密码模块
+OpenId
+下一次, 如何免登录
+浏览器自动完成用户名&amp;amp;密码
+secret Urls
+检查密码强度
+Email验证
+
+分模块解析如何登录
+首先明确captcha和recaptcha的区别. 这两者都比较损伤用户体验, 推荐作为保留手段. 对比ca">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/15/Design-login-system/">
+  <time datetime="2014-11-15T09:22:40.000Z">
+    11月 15 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">如何设计登录系统</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>本文主要翻译了<a href="http://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication?lq=1" target="_blank" rel="external">参考文献1</a>. </p>
+<h1 id="一个好的登录系统主要包含哪些模块?">一个好的登录系统主要包含哪些模块?</h1><ol>
+<li>如何登录</li>
+<li>如何保持登录状态</li>
+<li>如何存储密码</li>
+<li>采用密码问答</li>
+<li>忘记用户名/密码模块</li>
+<li>OpenId</li>
+<li>下一次, 如何免登录</li>
+<li>浏览器自动完成用户名&amp;密码</li>
+<li>secret Urls</li>
+<li>检查密码强度</li>
+<li>Email验证</li>
+</ol>
+<h1 id="分模块解析">分模块解析</h1><h3 id="如何登录">如何登录</h3><ol>
+<li>首先明确captcha和recaptcha的区别. 这两者都比较损伤用户体验, 推荐作为保留手段. 对比captcha, recaptcha对于机器更难识别, 相对好点. </li>
+<li>浏览器<em>自动提示功能</em>虽然可以关闭. 但是用户不同网站有很多账户, 可能会忘记那么多账户&amp;密码.</li>
+<li>对于网络嗅探, 一定使用基于加密(ssl) 或者 proven &amp; tested challenge-response scheme (for example, the Diffie-Hellman-based SRP) 的方式. 其他任何其他方式都会被黑客中间窃听. 仅仅基于客户端的加密方式也是无效的, 除非结合上述两种方法. 哈希密码, 可以有效防止密码明文泄露, 但是无法防止重放攻击, 中间人攻击/劫持, 暴力破解(username, salt, hashed password). </li>
+<li>发送完认证token后, 服务器端必须存储session记录用户已经被授权. cookie可以存储用户session的索引. Cookie必须有secure flag 和 Http only flag. httponly flag防止cookie被作为xss攻击. secure flag可以保证cookie仅通过 https 发送回来. cookie必须不可预知. 当cookie指向一个不存在的session时, cookie的值需要立刻被重置, 防止 session fixation. <a id="more"></a>
+<h3 id="如何保持已登录状态_-_Remember_me">如何保持已登录状态 - Remember me</h3>remember me 功能通常采用持久化登录cookie来实现, 同时也蕴含了危险. 如果用户知道什么是cookie, 该功能和cookie一样安全. 但是如果用户再公共计算机, 登录他们的账号, 并且忘记登出, 这就非常危险了.<br>个人来讲, 我比较喜欢保持登录状态, 因为我知道如何安全使用. 如果你认为用户都像我一样, 可以使用登录持久化. 我信奉用户是小白的哲学, 他们根本不关心他们的登录凭证, 登录持久化可能会出卖他们自己的信息. 所以, 不要使用登录持久化.<br>当然, 还有些系统无法承担账户被盗. 这些系统, 根本就不需要评估登录持久化的问题.<br>如果你坚持要登录cookie持久化: </li>
+</ol>
+<p>1. 参照<a href="">Charles Miller’s ‘Best Practices’</a>, </p>
+<p>First, follow Charles Miller’s ‘Best Practices’ article Do not get tempted to follow the ‘Improved’ Best Practices linked at the end of his article. Sadly, the ‘improvements’ to the scheme are easily thwarted (all an attacker has to do when stealing the ‘improved’ cookie is remember to delete the old one. This will require the legitimate user to re-login, creating a new series identifier and leaving the stolen one valid).</p>
+<p>And DO NOT STORE THE PERSISTENT LOGIN COOKIE (TOKEN) IN YOUR DATABASE, ONLY A HASH OF IT! The login token is Password Equivalent, so if an attacker got his hands on your database, he/she could use the tokens to log in to any account, just as if they were cleartext login-password combinations. Therefore, use hashing (according to <a href="http://security.stackexchange.com/a/63438/5002" target="_blank" rel="external">http://security.stackexchange.com/a/63438/5002</a> a weak hash will do just fine for this purpose) when storing persistent login tokens.</p>
+<p>. Where a cookie referencing a non-existent session is presented, its value should be replaced immediately to prevent session fixation.</p>
+<p>How to log in<br>How to remain logged in<br>How to store passwords<br>Using secret questions<br>Forgotten username/password functionality<br>OpenID<br>“Remember me” checkbox<br>Browser autocompletion of usernames and passwords<br>Secret URLs (public URLs protected by digest)<br>Checking password strength<br>E-mail validation<br>and much more about form based authentication …<br>参考文献:<br><a href="http://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication?lq=1" target="_blank" rel="external">http://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication?lq=1</a><br>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/tech/">tech</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/login/">login</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="如何设计登录系统">
+  </div>
+</section>
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
+      </li>
+    
+      <li>
+        <a href="/2014/10/14/hello-world/">Hello World</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

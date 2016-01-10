@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>mac下搭建Lamp环境 | Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+    <meta name="description" content="mac的osx系统也是基于Unix的操作系统. 因此, lnmp的四要素都存在osx版本, 可以方便的进行各种开发. 但是, 每个程序员都曾说过一句话: “在我机器上没问题”. 个人推荐在mac上通过vagrant搭建虚拟环境, 用于lnmp环境开发.本教程涉及到: vagrant, virtualbox, centos三个环境.">
+  
+  <meta name="description" content="mac的osx系统也是基于Unix的操作系统. 因此, lnmp的四要素都存在osx版本, 可以方便的进行各种开发. 但是, 每个程序员都曾说过一句话: “在我机器上没问题”. 个人推荐在mac上通过vagrant搭建虚拟环境, 用于lnmp环境开发.本教程涉及到: vagrant, virtualbox, centos三个环境.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac下搭建Lamp环境">
+<meta property="og:url" content="http://edwardlv.github.io/2015/03/17/mac-dev/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="mac的osx系统也是基于Unix的操作系统. 因此, lnmp的四要素都存在osx版本, 可以方便的进行各种开发. 但是, 每个程序员都曾说过一句话: “在我机器上没问题”. 个人推荐在mac上通过vagrant搭建虚拟环境, 用于lnmp环境开发.本教程涉及到: vagrant, virtualbox, centos三个环境.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mac下搭建Lamp环境">
+<meta name="twitter:description" content="mac的osx系统也是基于Unix的操作系统. 因此, lnmp的四要素都存在osx版本, 可以方便的进行各种开发. 但是, 每个程序员都曾说过一句话: “在我机器上没问题”. 个人推荐在mac上通过vagrant搭建虚拟环境, 用于lnmp环境开发.本教程涉及到: vagrant, virtualbox, centos三个环境.">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/03/17/mac-dev/">
+  <time datetime="2015-03-17T07:50:54.000Z">
+    3月 17 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">mac下搭建Lamp环境</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>mac的osx系统也是基于Unix的操作系统. 因此, lnmp的四要素都存在osx版本, 可以方便的进行各种开发. 但是, 每个程序员都曾说过一句话: “在我机器上没问题”. 个人推荐在mac上通过vagrant搭建虚拟环境, 用于lnmp环境开发.<br>本教程涉及到: vagrant, virtualbox, centos三个环境. </p>
+<a id="more"></a>
+<h2 id="1-_安装centos虚拟机-">1. 安装centos虚拟机.</h2><ol>
+<li>下载<a href="https://www.vagrantup.com/" target="_blank" rel="external"><em>vagrant</em></a>, <a href="https://www.virtualbox.org/" target="_blank" rel="external">virtualbox</a>, 并安装. </li>
+<li>建立目录<code>~/vg_centos</code>作为vagrant的工作目录. </li>
+<li>参照<a href="http://coolestguidesontheplanet.com/getting-started-vagrant-os-osx-10-9-mavericks/" target="_blank" rel="external">Getting Started with Vagrant on OSX 10.10 Yosemite</a>配置. <figure class="highlight"><table><tr><td class="code"><pre><span class="line">cd ~/vg_centos&#10;vagrant init    # &#21021;&#22987;&#21270;&#30446;&#24405;&#10;vagrant box add chef/centos-6.5     # &#23433;&#35013;centos&#34394;&#25311;&#26426;&#10;vim ~/vg_centos/Vagrantfile&#10;    config.vm.box = &#34;base&#34;&#10;    config.vm.box = &#34;chef/centos-6.5&#34;&#10;    config.vm.network &#34;private_network&#34;, ip: &#34;192.168.33.10&#34;&#10;    # config.vm.synced_folder&#21487;&#20197;&#19981;&#37197;&#32622;, &#22240;&#20026; ~/vg_centos &#33258;&#36523;&#24050;&#32463;&#21644; centos: /vagrant/&#30446;&#24405;&#26144;&#23556;. &#10;vagrant up  # &#21551;&#21160;&#34394;&#25311;&#26426;&#10;vagrant ssh # &#36830;&#25509;&#34394;&#25311;&#26426;&#10;# &#25104;&#21151;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="2-_centos下安装lnmp">2. centos下安装lnmp</h2><p>当前环境下没有man手册.<br><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">yum <span class="keyword">install</span> man</span><br><span class="line">yum <span class="keyword">install</span> man-pages</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://shmily2038.iteye.com/blog/1860063" target="_blank" rel="external">安装nginx</a><br><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">rpm -ivh <span class="symbol">http:</span>/<span class="regexp">/nginx.org/packages</span><span class="regexp">/centos/</span><span class="number">6</span>/noarch/<span class="constant">RPMS/</span>nginx-release-centos-<span class="number">6</span>-<span class="number">0</span>.el6.ngx.noarch.rpm</span><br><span class="line">yum install nginx</span><br></pre></td></tr></table></figure></p>
+<p>安装mysql<br><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">yum <span class="operator"><span class="keyword">install</span> mysql55w</span><br><span class="line">yum <span class="keyword">install</span> mysql55w-<span class="keyword">server</span></span></span><br></pre></td></tr></table></figure></p>
+<p><a href="https://webtatic.com/packages/php56/" target="_blank" rel="external">安装php</a><br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">rpm -Uvh https:<span class="comment">//mirror.webtatic.com/yum/el6/latest.rpm</span></span><br><span class="line">yum install php56w php56w-opcache php56w-fpm php56w-mysql php56w-pdo</span><br><span class="line">yum <span class="built_in">list</span> php56* <span class="preprocessor"># 按需安装</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="高级教程">高级教程</h2><p><a href="http://stackoverflow.com/questions/17729757/preferred-fallback-network-interfaces-with-vagrant" target="_blank" rel="external">vagrant虚拟机配置桥接模式</a></p>
+<h2 id="over">over</h2>
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/tech/">tech</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/lnmp/">lnmp</a>, <a class="tags-link" href="/tags/osx/">osx</a>, <a class="tags-link" href="/tags/vagrant/">vagrant</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="mac下搭建Lamp环境">
+  </div>
+</section>
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
+      </li>
+    
+      <li>
+        <a href="/2014/10/14/hello-world/">Hello World</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

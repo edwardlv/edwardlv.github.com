@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>简明 supervisor | Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+    <meta name="description" content="supervisor, 名如其义, 是一个基于python的进程监控程序. 本文ubuntu系统, 简单介绍一下如何配置, 使用supervisor. 
+安装sudo apt-get install supervisor # ubuntu 自带python
+测试echo_supervisord_conf
+创建新配置或修改默认配置文件 (-c可以指定配置文件)# 创建echo_supervisord">
+  
+  <meta name="description" content="supervisor, 名如其义, 是一个基于python的进程监控程序. 本文ubuntu系统, 简单介绍一下如何配置, 使用supervisor. 
+安装sudo apt-get install supervisor # ubuntu 自带python
+测试echo_supervisord_conf
+创建新配置或修改默认配置文件 (-c可以指定配置文件)# 创建echo_supervisord">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简明 supervisor">
+<meta property="og:url" content="http://edwardlv.github.io/2014/12/25/simple-supervisord/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="supervisor, 名如其义, 是一个基于python的进程监控程序. 本文ubuntu系统, 简单介绍一下如何配置, 使用supervisor. 
+安装sudo apt-get install supervisor # ubuntu 自带python
+测试echo_supervisord_conf
+创建新配置或修改默认配置文件 (-c可以指定配置文件)# 创建echo_supervisord">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简明 supervisor">
+<meta name="twitter:description" content="supervisor, 名如其义, 是一个基于python的进程监控程序. 本文ubuntu系统, 简单介绍一下如何配置, 使用supervisor. 
+安装sudo apt-get install supervisor # ubuntu 自带python
+测试echo_supervisord_conf
+创建新配置或修改默认配置文件 (-c可以指定配置文件)# 创建echo_supervisord">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/25/simple-supervisord/">
+  <time datetime="2014-12-25T05:59:21.000Z">
+    12月 25 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">简明 supervisor</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>supervisor, 名如其义, 是一个基于python的进程监控程序. 本文ubuntu系统, 简单介绍一下如何配置, 使用supervisor. </p>
+<h3 id="安装">安装</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install supervisor <span class="comment"># ubuntu 自带python</span></span><br></pre></td></tr></table></figure>
+<h3 id="测试">测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span>_supervisord_conf</span><br></pre></td></tr></table></figure>
+<h3 id="创建新配置或修改默认配置文件_(-c可以指定配置文件)">创建新配置或修改默认配置文件 (-c可以指定配置文件)</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建</span></span><br><span class="line"><span class="built_in">echo</span>_supervisord_conf &gt; /etc/supervisord.conf <span class="comment"># 这个路径也是centos的默认路径.</span></span><br><span class="line"><span class="comment"># 默认</span></span><br><span class="line">/etc/supervisor/supervisord.conf</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="添加任务">添加任务</h3><figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line">; 我们采用默认配置文件方式.</span><br><span class="line">; vim /etc/supervisor/conf.d/test.conf</span><br><span class="line">; 常用配置项</span><br><span class="line">[program:test]</span><br><span class="line">command = php /home/vagrant/test.php   ;需要执行的命令</span><br><span class="line">autostart=<span class="keyword">true</span>    	; supervisor启动的时候是否随着同时启动</span><br><span class="line">autorestart=<span class="keyword">true</span>   	; 当程序跑出<span class="keyword">exit</span>的时候，这个program会自动重启</span><br><span class="line">startsecs=<span class="number">3</span>  ; 程序重启时候停留在runing状态的秒数</span><br><span class="line">user=vagrant ; 程序运行用户</span><br><span class="line">stdout_logfile=/tmp/test.log</span><br><span class="line"></span><br><span class="line">; 下面是详细配置项</span><br><span class="line">;[program:theprogramname]</span><br><span class="line">;command=/bin/cat              ; the program (relative <span class="keyword">uses</span> PATH, can <span class="keyword">take</span> args)</span><br><span class="line">;process_name=%(program_name)s ; process_name expr (<span class="keyword">default</span> %(program_name)s)</span><br><span class="line">;numprocs=<span class="number">1</span>                    ; number <span class="keyword">of</span> processes copies <span class="keyword">to</span> start (def <span class="number">1</span>)</span><br><span class="line">;directory=/tmp                ; directory <span class="keyword">to</span> cwd <span class="keyword">to</span> before exec (def no cwd)</span><br><span class="line">;umask=<span class="number">022</span>                     ; umask <span class="keyword">for</span> process (<span class="keyword">default</span> None)</span><br><span class="line">;priority=<span class="number">999</span>                  ; the relative start priority (<span class="keyword">default</span> <span class="number">999</span>)</span><br><span class="line">;autostart=<span class="keyword">true</span>                ; start at supervisord start (<span class="keyword">default</span>: <span class="keyword">true</span>)</span><br><span class="line">;autorestart=unexpected        ; whether/when <span class="keyword">to</span> restart (<span class="keyword">default</span>: unexpected)</span><br><span class="line">;startsecs=<span class="number">1</span>                   ; number <span class="keyword">of</span> secs prog must stay running (def. <span class="number">1</span>)</span><br><span class="line">;startretries=<span class="number">3</span>                ; max # <span class="keyword">of</span> serial start failures (<span class="keyword">default</span> <span class="number">3</span>)</span><br><span class="line">;exitcodes=<span class="number">0</span>,<span class="number">2</span>                 ; <span class="string">'expected'</span> <span class="keyword">exit</span> codes <span class="keyword">for</span> process (<span class="keyword">default</span> <span class="number">0</span>,<span class="number">2</span>)</span><br><span class="line">;stopsignal=QUIT               ; signal used <span class="keyword">to</span> kill process (<span class="keyword">default</span> TERM)</span><br><span class="line">;stopwaitsecs=<span class="number">10</span>               ; max num secs <span class="keyword">to</span> wait b4 SIGKILL (<span class="keyword">default</span> <span class="number">10</span>)</span><br><span class="line">;stopasgroup=<span class="keyword">false</span>             ; send stop signal <span class="keyword">to</span> the UNIX process <span class="keyword">group</span> (<span class="keyword">default</span> <span class="keyword">false</span>)</span><br><span class="line">;killasgroup=<span class="keyword">false</span>             ; SIGKILL the UNIX process <span class="keyword">group</span> (def <span class="keyword">false</span>)</span><br><span class="line">;user=chrism                   ; setuid <span class="keyword">to</span> this UNIX account <span class="keyword">to</span> run the program</span><br><span class="line">;redirect_stderr=<span class="keyword">true</span>          ; redirect proc stderr <span class="keyword">to</span> stdout (<span class="keyword">default</span> <span class="keyword">false</span>)</span><br><span class="line">;stdout_logfile=/a/path        ; stdout log path, NONE <span class="keyword">for</span> none; <span class="keyword">default</span> AUTO</span><br><span class="line">;stdout_logfile_maxbytes=<span class="number">1</span>MB   ; max # logfile bytes b4 rotation (<span class="keyword">default</span> <span class="number">50</span>MB)</span><br><span class="line">;stdout_logfile_backups=<span class="number">10</span>     ; # <span class="keyword">of</span> stdout logfile backups (<span class="keyword">default</span> <span class="number">10</span>)</span><br><span class="line">;stdout_capture_maxbytes=<span class="number">1</span>MB   ; number <span class="keyword">of</span> bytes <span class="keyword">in</span> <span class="string">'capturemode'</span> (<span class="keyword">default</span> <span class="number">0</span>)</span><br><span class="line">;stdout_events_enabled=<span class="keyword">false</span>   ; emit events <span class="keyword">on</span> stdout writes (<span class="keyword">default</span> <span class="keyword">false</span>)</span><br><span class="line">;stderr_logfile=/a/path        ; stderr log path, NONE <span class="keyword">for</span> none; <span class="keyword">default</span> AUTO</span><br><span class="line">;stderr_logfile_maxbytes=<span class="number">1</span>MB   ; max # logfile bytes b4 rotation (<span class="keyword">default</span> <span class="number">50</span>MB)</span><br><span class="line">;stderr_logfile_backups=<span class="number">10</span>     ; # <span class="keyword">of</span> stderr logfile backups (<span class="keyword">default</span> <span class="number">10</span>)</span><br><span class="line">;stderr_capture_maxbytes=<span class="number">1</span>MB   ; number <span class="keyword">of</span> bytes <span class="keyword">in</span> <span class="string">'capturemode'</span> (<span class="keyword">default</span> <span class="number">0</span>)</span><br><span class="line">;stderr_events_enabled=<span class="keyword">false</span>   ; emit events <span class="keyword">on</span> stderr writes (<span class="keyword">default</span> <span class="keyword">false</span>)</span><br><span class="line">;environment=A=<span class="number">1</span>,B=<span class="number">2</span>           ; process environment additions (def no adds)</span><br><span class="line">;serverurl=AUTO                ; <span class="keyword">override</span> serverurl computation (childutils)</span><br></pre></td></tr></table></figure>
+<h3 id="任务脚本">任务脚本</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"><span class="variable">$t</span> = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span> = <span class="number">0</span> ; <span class="variable">$i</span> &lt; <span class="variable">$t</span>; <span class="variable">$i</span> ++ ) &#123;</span><br><span class="line">    <span class="keyword">echo</span> date(<span class="string">"H:i:s"</span>) , <span class="string">"\n"</span>;</span><br><span class="line">    sleep(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"finish"</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="启动服务器">启动服务器</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">/usr/bin/python /usr/bin/supervisord -c /etc/supervisor/supervisord.conf&#10;/etc/init.d/supervisor restart</span><br></pre></td></tr></table></figure>
+<h3 id="Done">Done</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">tail -f /tmp/test.<span class="command">log</span></span><br><span class="line"><span class="comment"># 程序持续运行.</span></span><br></pre></td></tr></table></figure>
+<h3 id="supervisorctl">supervisorctl</h3><p>supervisorctl是supervisor的命令行控制台. 可以查看控制进程的状态.<br><figure class="highlight puppet"><table><tr><td class="code"><pre><span class="line">supervisor&gt; <span class="literal">status</span></span><br><span class="line">test                             <span class="constant">R</span>UNNING    pid <span class="number">11018</span>, <span class="built_in">uptime</span> <span class="number">0</span>:<span class="number">00</span>:<span class="number">19</span></span><br><span class="line">supervisor&gt; <span class="literal">status</span></span><br><span class="line">test                             <span class="constant">S</span>TARTING   </span><br><span class="line">supervisor&gt; <span class="literal">status</span></span><br><span class="line">test                             <span class="constant">R</span>UNNING    pid <span class="number">11019</span>, <span class="built_in">uptime</span> <span class="number">0</span>:<span class="number">00</span>:<span class="number">03</span></span><br></pre></td></tr></table></figure></p>
+<p><code>RUNNING-&gt;STARTING-&gt;RUNNING</code>表示正在重启. 重启后pid更新.</p>
+<h3 id="异常处理">异常处理</h3><p>如果出现异常情况, 可以去配置项: <code>logfile=/var/log/supervisor/supervisord.log</code> 配置的log中查看详情.</p>
+<h3 id="疑难问题">疑难问题</h3><ol>
+<li>被监控进程, 必须由supervisord来启动. </li>
+<li>被监控进程必须<strong>不是</strong>daemon程序.</li>
+<li><code>Another program is already listening on a port that one of our HTTP serve                                                                                                                rs is configured to use.  Shut this program down first before starting superviso                                                                                                                rd.</code> 如果supervisor已经启动, 只需要kill掉. 否则, 参照<a href="http://serverfault.com/questions/114477/supervisor-http-server-port-issue" target="_blank" rel="external">解决方案</a></li>
+<li>如果supervisor自身挂了呢? <ul>
+<li>2个supervisor互相监控</li>
+<li>/etc/initab</li>
+</ul>
+</li>
+</ol>
+<p>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/tech/">tech</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/supervisor/">supervisor</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="简明 supervisor">
+  </div>
+</section>
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
+      </li>
+    
+      <li>
+        <a href="/2014/10/14/hello-world/">Hello World</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,649 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+  <meta name="description" content="码出我天地.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Code says.">
+<meta property="og:url" content="http://edwardlv.github.io/archives/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="码出我天地.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Code says.">
+<meta name="twitter:description" content="码出我天地.">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/03/17/mac-dev/">
+  <time datetime="2015-03-17T07:50:54.000Z">
+    3月 17 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>mac的osx系统也是基于Unix的操作系统. 因此, lnmp的四要素都存在osx版本, 可以方便的进行各种开发. 但是, 每个程序员都曾说过一句话: “在我机器上没问题”. 个人推荐在mac上通过vagrant搭建虚拟环境, 用于lnmp环境开发.<br>本教程涉及到: vagrant, virtualbox, centos三个环境. </p>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2015/03/17/mac-dev/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/01/04/top-wa-is-so-high/">
+  <time datetime="2015-01-04T10:37:57.000Z">
+    1月 4 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>Staging测试服务器, 每次登陆上去都感到隐隐约约的蛋疼. 今天下午的登陆已经不能用蛋疼来形容了. <code>top</code>后发现:<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">Cpu(s):  0.3%us,  0.0%sy,  0.0%ni,  0.0%id, 99.3%wa,  0.0%hi,  0.0%si,  0.3%st</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>wa: Percentage of time that the CPU or CPUs were idle during which the system had an outstanding disk I/O request.<br>wa: 等待输入输出的CPU时间百分比</p>
+</blockquote>
+<p>wa为io wait, 常见比如: 访问本机mysql的sql(排除网络io), 返回结果前cpu等待结果, 这个过程cpu处于io wait状态. wa过高, 又两种可能1. 机器io出现问题. 2. 硬盘出现故障.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2015/01/04/top-wa-is-so-high/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/25/simple-supervisord/">
+  <time datetime="2014-12-25T05:59:21.000Z">
+    12月 25 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/12/25/simple-supervisord/">简明 supervisor</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>supervisor, 名如其义, 是一个基于python的进程监控程序. 本文ubuntu系统, 简单介绍一下如何配置, 使用supervisor. </p>
+<h3 id="安装">安装</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> install supervisor <span class="comment"># ubuntu 自带python</span></span><br></pre></td></tr></table></figure>
+<h3 id="测试">测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span>_supervisord_conf</span><br></pre></td></tr></table></figure>
+<h3 id="创建新配置或修改默认配置文件_(-c可以指定配置文件)">创建新配置或修改默认配置文件 (-c可以指定配置文件)</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建</span></span><br><span class="line"><span class="built_in">echo</span>_supervisord_conf &gt; /etc/supervisord.conf <span class="comment"># 这个路径也是centos的默认路径.</span></span><br><span class="line"><span class="comment"># 默认</span></span><br><span class="line">/etc/supervisor/supervisord.conf</span><br></pre></td></tr></table></figure>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/12/25/simple-supervisord/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/12/06/how-to-delete-sublime-project/">
+  <time datetime="2014-12-06T07:33:05.000Z">
+    12月 6 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>sublime作为一款优秀的编辑器, 强大的功能不用多言. 对于其编辑器功能, sublime的项目管理功能有些稚嫩.<br>对于很多程序员, 误建了一个项目, 缺找不到删除功能. 本文主要参照 <a href="http://stackoverflow.com/questions/11744365/removing-projects-in-sublime-text-2-and-3">stackoverflow</a>, 介绍一下, 如何删除sublime中的项目. </p>
+<h2 id="方法1-_菜单删除Project">方法1. 菜单删除Project</h2><p>方法一方便, 快捷. 但是会<strong>删除所有project</strong>, 请慎用!!<br><code>Project-&gt;Open Recent-&gt;Clear Items</code><br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/12/06/how-to-delete-sublime-project/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/27/git-source-code/">
+  <time datetime="2014-11-27T07:51:09.000Z">
+    11月 27 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/27/git-source-code/">Git源码导读</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>Git是Linux的大作, 其实第一版的代码, 仅1k多行. 但是git的基本功能却也都在其中, 是非常值得学习的源码, 而且工程量也不大. </p>
+<h3 id="下载源码">下载源码</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/git/git.git&#10;git tag -l&#10;# &#36873;&#25321; v0.99&#29256;&#10;git checkout v0.99&#10;git log &#10;# &#36873;&#25321;&#26368;&#26032;&#30340;&#19968;&#20010;&#29256;&#26412;&#10;git reset e83c5163316f89bfbde7d9ab23ca2e25604af290&#10;git add .&#10;git reset --hard</span><br></pre></td></tr></table></figure>
+<h3 id="源码结构">源码结构</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">Makefile&#10;README&#10;cache.h&#10;cat-file.c&#10;commit-tree.c&#10;init-db.c&#10;read-cache.c&#10;read-tree.c&#10;show-diff.c&#10;update-cache.c&#10;write-tree.c</span><br></pre></td></tr></table></figure>
+<h3 id="init-db-c"><code>init-db.c</code></h3><blockquote>
+</blockquote>
+<p>参考文献:<br><a href="http://blog.csdn.net/gsyzhu/article/details/38065765" target="_blank" rel="external">http://blog.csdn.net/gsyzhu/article/details/38065765</a><br>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/15/Design-login-system/">
+  <time datetime="2014-11-15T09:22:40.000Z">
+    11月 15 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/15/Design-login-system/">如何设计登录系统</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>本文主要翻译了<a href="http://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication?lq=1">参考文献1</a>. </p>
+<h1 id="一个好的登录系统主要包含哪些模块?">一个好的登录系统主要包含哪些模块?</h1><ol>
+<li>如何登录</li>
+<li>如何保持登录状态</li>
+<li>如何存储密码</li>
+<li>采用密码问答</li>
+<li>忘记用户名/密码模块</li>
+<li>OpenId</li>
+<li>下一次, 如何免登录</li>
+<li>浏览器自动完成用户名&amp;密码</li>
+<li>secret Urls</li>
+<li>检查密码强度</li>
+<li>Email验证</li>
+</ol>
+<h1 id="分模块解析">分模块解析</h1><h3 id="如何登录">如何登录</h3><ol>
+<li>首先明确captcha和recaptcha的区别. 这两者都比较损伤用户体验, 推荐作为保留手段. 对比captcha, recaptcha对于机器更难识别, 相对好点. </li>
+<li>浏览器<em>自动提示功能</em>虽然可以关闭. 但是用户不同网站有很多账户, 可能会忘记那么多账户&amp;密码.</li>
+<li>对于网络嗅探, 一定使用基于加密(ssl) 或者 proven &amp; tested challenge-response scheme (for example, the Diffie-Hellman-based SRP) 的方式. 其他任何其他方式都会被黑客中间窃听. 仅仅基于客户端的加密方式也是无效的, 除非结合上述两种方法. 哈希密码, 可以有效防止密码明文泄露, 但是无法防止重放攻击, 中间人攻击/劫持, 暴力破解(username, salt, hashed password). </li>
+<li>发送完认证token后, 服务器端必须存储session记录用户已经被授权. cookie可以存储用户session的索引. Cookie必须有secure flag 和 Http only flag. httponly flag防止cookie被作为xss攻击. secure flag可以保证cookie仅通过 https 发送回来. cookie必须不可预知. 当cookie指向一个不存在的session时, cookie的值需要立刻被重置, 防止 session fixation.
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/11/15/Design-login-system/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/10/druby-im-info-by-xmpp4r/">
+  <time datetime="2014-11-10T08:10:57.000Z">
+    11月 10 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="http://www.rubyfleebie.com/im-integration-with-xmpp4r-2-mistakes-to-avoid/" target="_blank" rel="external">xmpp4r advoiding this!</a><br>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/09/xmpp-simple/">
+  <time datetime="2014-11-09T15:35:47.000Z">
+    11月 9 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="什么是XMPP?">什么是XMPP?</h2><p>xmpp(The e<strong>X</strong>tensible <strong>M</strong>essaging and <strong>P</strong>resence <strong>P</strong>rotocol, aka as Jabber)一种IM通讯数据交换协议, 数据格式为XML. 该数据交换协议定义了3种角色: client, server, gate, 两两之间可以基于xmpp协议相互通信. xmpp server是基于域名服务, client@jabber.server_A 也可以将信息发送到 jabber.server_B. 此外, 通过xmpp gate甚至可以发送消息到非xmpp server. </p>
+<h2 id="什么是JID">什么是JID</h2><p>JID的格式, <strong><em>node@server/resource</em></strong>.</p>
+<ul>
+<li>node表示某个server上唯一一个人. </li>
+<li>server代表了node所在的server. </li>
+<li>resource代表相同用户的不同场景. (实际区别不大?)</li>
+</ul>
+<blockquote>
+<p>node@server/resource 三者决定一个唯一的jid.</p>
+</blockquote>
+<h2 id="信息流">信息流</h2><p>Jabber信息是xml格式, 基本交流模式 <code>client&lt;--&gt;server</code>, 比如: UserA 和 UserB 聊天, 信息流:<br><figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">client</span> UserA &lt;----&gt; <span class="keyword">server</span> &lt;----&gt; <span class="keyword">client</span> UserB.</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://ceit.uq.edu.au/content/how-xmpp-works-step-step">http://ceit.uq.edu.au/content/how-xmpp-works-step-step</a>总结了client和server交流模式. <a href="http://blog.csdn.net/huyoo/article/details/24353105">http://blog.csdn.net/huyoo/article/details/24353105</a>做了翻译. </p>
+<p>个人总结: 一次 client &amp; server 沟通, client和server 均以 <code>&lt;stream&gt;</code>开始, 服务器端开始维护一个session, <code>&lt;/stream&gt;</code>表示结束, 回收session, 关闭连接.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/11/09/xmpp-simple/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/09/qtip2-default/">
+  <time datetime="2014-11-08T16:24:09.000Z">
+    11月 9 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/09/qtip2-default/">qtip2简明教程</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="http://qtip2.com/"><strong>qtip2</strong></a>是一个非常强大的基于jquery的气泡提示工具. 它提供了一整套css+完备的配置方案. </p>
+<h3 id="下载">下载</h3><p><a href="http://qtip2.com/download"><em>http://qtip2.com/download</em></a>页面种, 你可以根据需求, 构建自己的qtip js文件.</p>
+<h3 id="用法">用法</h3><p>下面通过qtip2的默认配置文件讲解如何定义自身的qtip2.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/11/09/qtip2-default/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/08/god-father1-book/">
+  <time datetime="2014-11-08T08:56:04.000Z">
+    11月 8 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/08/god-father1-book/">God Father 书评</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>某周末下午闲无聊, 重温了经典电影 <strong>God Father</strong>. 虽然是第n次看了, 但是某些情节, 仍然一头雾水. 于是, 萌生了看<a href="http://readfree.me/book/DIY11983">书</a>的念头.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/11/08/god-father1-book/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+    <a href="/archives/page/2/" class="next">下一页</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
+      </li>
+    
+      <li>
+        <a href="/2014/10/14/hello-world/">Hello World</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
