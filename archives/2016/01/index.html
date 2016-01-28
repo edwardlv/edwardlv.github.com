@@ -13,7 +13,7 @@
   <meta name="description" content="码出我天地.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Code says.">
-<meta property="og:url" content="http://edwardlv.github.io/archives/2015/03/index.html">
+<meta property="og:url" content="http://edwardlv.github.io/archives/2016/01/index.html">
 <meta property="og:site_name" content="Code says.">
 <meta property="og:description" content="码出我天地.">
 <meta name="twitter:card" content="summary">
@@ -70,30 +70,26 @@
   <header>
     
       <div class="icon"></div>
-      <a href="/2015/03/17/mac-dev/">
-  <time datetime="2015-03-17T07:50:54.000Z">
-    3月 17 2015
+      <a href="/2016/01/28/homebrew_update_error/">
+  <time datetime="2016-01-28T02:47:54.000Z">
+    1月 28 2016
   </time>
 </a>
     
     
   
-    <h1 class="title"><a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a></h1>
+    <h1 class="title"><a href="/2016/01/28/homebrew_update_error/"></a></h1>
   
 
   </header>
   
   <div class="entry">
     
-      <p>mac的osx系统也是基于Unix的操作系统. 因此, lnmp的四要素都存在osx版本, 可以方便的进行各种开发. 但是, 每个程序员都曾说过一句话: “在我机器上没问题”. 个人推荐在mac上通过vagrant搭建虚拟环境, 用于lnmp环境开发.<br>本教程涉及到: vagrant, virtualbox, centos三个环境. </p>
+      <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">[edward@~]$ sudo brew update</span><br><span class="line"><span class="string">remote:</span> GitHub is offline <span class="keyword">for</span> maintenance. See <span class="string">http:</span><span class="comment">//status.github.com for more info.</span></span><br><span class="line"><span class="string">fatal:</span> unable to access <span class="string">'https://github.com/Homebrew/homebrew.git/'</span>: The requested URL returned <span class="string">error:</span> <span class="number">503</span></span><br><span class="line"><span class="string">Error:</span> Failure <span class="keyword">while</span> <span class="string">executing:</span> git pull --ff --no-rebase --quiet origin refs<span class="regexp">/heads/</span><span class="string">master:</span>refs<span class="regexp">/remotes/</span>origin/master</span><br><span class="line"></span><br><span class="line">[edward@~]$ cd `brew --prefix`</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ git remote add origin <span class="string">https:</span><span class="comment">//github.com/Homebrew/homebrew.git</span></span><br><span class="line"><span class="string">fatal:</span> remote origin already exists.</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ sudo git fetch origin</span><br><span class="line"><span class="string">Password:</span></span><br><span class="line"><span class="string">remote:</span> Counting <span class="string">objects:</span> <span class="number">12442</span>, done.</span><br><span class="line"><span class="string">remote:</span> Compressing <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">19</span>/<span class="number">19</span>), done.</span><br><span class="line"><span class="string">remote:</span> Total <span class="number">12442</span> (delta <span class="number">6318</span>), reused <span class="number">6309</span> (delta <span class="number">6309</span>), pack-reused <span class="number">6114</span></span><br><span class="line">Receiving <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">12442</span><span class="regexp">/12442), 4.27 MiB | 154.00 KiB/</span>s, done.</span><br><span class="line">Resolving <span class="string">deltas:</span> <span class="number">100</span>% (<span class="number">9664</span>/<span class="number">9664</span>), completed with <span class="number">971</span> local objects.</span><br><span class="line">From <span class="string">https:</span><span class="comment">//github.com/Homebrew/homebrew</span></span><br><span class="line">   d9e1050.<span class="number">.5</span>bcc7b1  master     -&gt; origin/master</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ sudo git reset --hard origin/master</span><br><span class="line">HEAD is now at <span class="number">5</span>bcc7b1 <span class="string">rtags:</span> boneyard</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ sudo brew update</span><br><span class="line">Already up-to-date.</span><br></pre></td></tr></table></figure>
     
   </div>
   <footer class="end-sep">
     
-      
-        <div class="alignleft">
-          <a href="/2015/03/17/mac-dev/#more" class="more-link">阅读全文</a>
-        </div>
       
       
     
