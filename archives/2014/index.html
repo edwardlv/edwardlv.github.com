@@ -206,17 +206,29 @@
 <h1 id="一个好的登录系统主要包含哪些模块?">一个好的登录系统主要包含哪些模块?</h1><ol>
 <li>如何登录</li>
 <li>如何保持登录状态</li>
+<li>如何管理cookie</li>
+<li>SSL/Https加密传输</li>
 <li>如何存储密码</li>
 <li>采用密码问答</li>
 <li>忘记用户名/密码模块</li>
+<li>使用nonces防止csrf攻击</li>
 <li>OpenId</li>
-<li>下一次, 如何免登录</li>
+<li>下一次, 如何免登录 “remember me”功能</li>
 <li>浏览器自动完成用户名&amp;密码</li>
 <li>secret Urls</li>
 <li>检查密码强度</li>
 <li>Email验证</li>
 </ol>
-<h1 id="分模块解析">分模块解析</h1><h3 id="如何登录">如何登录</h3><ol>
+<h1 id="分模块解析">分模块解析</h1><h3 id="如何登录">如何登录</h3><p>首先, 我们假设你已经知道如何创建一个基于Post请求的login+password的HTML, 并发送到服务器端鉴权. 本节主要展示了实践中较好的策略, 和如何避免常见安全陷阱. </p>
+<h5 id="是否使用HTTPS?_(TO_HTTPS_OR_NOT_TO_HTTPS?)">是否使用HTTPS? (TO HTTPS OR NOT TO HTTPS?)</h5><p>除非链接是安全的(通过使用SSL/Tls的HTTPS隧道), 否则你的登陆信息明文发送. 因此, 任何人监听浏览器和web server通信链路都能够读取到该登陆信息. 通常政府会监听我们的通信网络, 我们也不具备自己的专线. 因此如果要保护自己的重要信息, 使用HTTPS. </p>
+<p>总之, 保护登陆信息防止嗅探和监听的最佳实践使用HTTPS或者其他基于证书的加密链路, 或者一个证明或测试过的可靠方法(比如: Diffie-Hellman-based SRP). 任何其他方法均可以被嗅探攻击或者暴力破解(如果有salt情况)攻破. </p>
+<h5 id="(不要)自己构建基于js的加密和哈希算法">(不要)自己构建基于js的加密和哈希算法</h5><p>考虑到搭建一套SSL认证有不低的开销和一定的技术难度, 很多开发者尝试在js中哈希或者加密敏感信息, 防止在非安全链路登陆信息明文传输.</p>
+<p>但是这样做本质上是无效的, 除非和上述一些策略结合. 只是哈希密码可以邮箱的防止密码泄露, 但是他比较容易受到重放攻击和中间人攻击. </p>
+<h5 id="验证码_vs_便利性">验证码 vs 便利性</h5><p>验证码主要用于防止: 自动化的根据字典暴力破解. 当然server端频次限制也可以解决这个问题. </p>
+<p>验证码识别器通常会被人针对编写外挂, 甚至通过廉价的人工劳动识别. 推荐使用Google的reCAPTCHA, 它可以防止OCR破解, 甚至很难被人识别. </p>
+<h5 id="存储密码&amp;验证登陆">存储密码&amp;验证登陆</h5><p>尽管已经有很多公开的社工库, 我们也看到很多被泄露的用户信息, 我们必须强调: 不要再数据库中存储密码明文. 一旦用户用户的数据库被sql注入破解, 而且你的密码是明文的, 你的整个登陆系统就 game over了. </p>
+<p>如果不存储密码, 如何去检查用户发送的登陆信息呢? 使用key derivation function(类似于加密机) 哈希密码, 将结果存储于数据库中. 在</p>
+<ol>
 <li>首先明确captcha和recaptcha的区别. 这两者都比较损伤用户体验, 推荐作为保留手段. 对比captcha, recaptcha对于机器更难识别, 相对好点. </li>
 <li>浏览器<em>自动提示功能</em>虽然可以关闭. 但是用户不同网站有很多账户, 可能会忘记那么多账户&amp;密码.</li>
 <li>对于网络嗅探, 一定使用基于加密(ssl) 或者 proven &amp; tested challenge-response scheme (for example, the Diffie-Hellman-based SRP) 的方式. 其他任何其他方式都会被黑客中间窃听. 仅仅基于客户端的加密方式也是无效的, 除非结合上述两种方法. 哈希密码, 可以有效防止密码明文泄露, 但是无法防止重放攻击, 中间人攻击/劫持, 暴力破解(username, salt, hashed password). </li>
@@ -452,7 +464,7 @@
   
     <li><a href="/categories/book/">book</a><small>1</small></li>
   
-    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+    <li><a href="/categories/tech/">tech</a><small>14</small></li>
   
   </ul>
 </div>
@@ -468,19 +480,31 @@
   
     <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
   
+    <li><a href="/tags/curl/">curl</a><small>1</small></li>
+  
     <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/homebrew/">homebrew</a><small>1</small></li>
   
     <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
   
     <li><a href="/tags/jid/">jid</a><small>1</small></li>
   
-    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+    <li><a href="/tags/lnmp/">lnmp</a><small>2</small></li>
   
     <li><a href="/tags/login/">login</a><small>1</small></li>
   
-    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+    <li><a href="/tags/netstat/">netstat</a><small>1</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>2</small></li>
+  
+    <li><a href="/tags/php-fpm/">php-fpm</a><small>1</small></li>
   
     <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sockstat/">sockstat</a><small>1</small></li>
   
     <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
   
@@ -488,9 +512,13 @@
   
     <li><a href="/tags/swap/">swap</a><small>1</small></li>
   
+    <li><a href="/tags/sysctl/">sysctl</a><small>1</small></li>
+  
+    <li><a href="/tags/tcp/">tcp</a><small>1</small></li>
+  
     <li><a href="/tags/top/">top</a><small>1</small></li>
   
-    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+    <li><a href="/tags/vagrant/">vagrant</a><small>2</small></li>
   
     <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
   
@@ -514,11 +542,35 @@
   <ul class="entry">
     
       <li>
-        <a href="/2016/01/28/homebrew_update_error/"></a>
+        <a href="/2016/04/28/debug-online-network/">debug online network</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/28/curl-info/">curl info</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/how-to-keep-two-sshkey/">如何使用双SSH KEY访问gitlab</a>
+      </li>
+    
+      <li>
+        <a href="/2016/02/16/nginx-limit/">nginx limit</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a>
       </li>
     
       <li>
         <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a>
       </li>
     
       <li>
@@ -537,30 +589,6 @@
         <a href="/2014/11/27/git-source-code/">Git源码导读</a>
       </li>
     
-      <li>
-        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
-      </li>
-    
-      <li>
-        <a href="/2014/10/14/hello-world/">Hello World</a>
-      </li>
-    
   </ul>
 </div>
 
@@ -568,7 +596,7 @@
 </aside>
   <footer id="footer"><div class="copyright">
   
-  &copy; 2016 <a href="/">Edward Lv</a>
+  &copy; 2018 <a href="/">Edward Lv</a>
   
 </div>
 <div class="theme-copyright">

@@ -1,0 +1,419 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+  <meta name="description" content="码出我天地.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Code says.">
+<meta property="og:url" content="http://edwardlv.github.io/categories/tech/page/2/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="码出我天地.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Code says.">
+<meta name="twitter:description" content="码出我天地.">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/10/druby-im-info-by-xmpp4r/">
+  <time datetime="2014-11-10T08:10:57.000Z">
+    11月 10 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="http://www.rubyfleebie.com/im-integration-with-xmpp4r-2-mistakes-to-avoid/" target="_blank" rel="external">xmpp4r advoiding this!</a><br>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/09/xmpp-simple/">
+  <time datetime="2014-11-09T15:35:47.000Z">
+    11月 9 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h2 id="什么是XMPP?">什么是XMPP?</h2><p>xmpp(The e<strong>X</strong>tensible <strong>M</strong>essaging and <strong>P</strong>resence <strong>P</strong>rotocol, aka as Jabber)一种IM通讯数据交换协议, 数据格式为XML. 该数据交换协议定义了3种角色: client, server, gate, 两两之间可以基于xmpp协议相互通信. xmpp server是基于域名服务, client@jabber.server_A 也可以将信息发送到 jabber.server_B. 此外, 通过xmpp gate甚至可以发送消息到非xmpp server. </p>
+<h2 id="什么是JID">什么是JID</h2><p>JID的格式, <strong><em>node@server/resource</em></strong>.</p>
+<ul>
+<li>node表示某个server上唯一一个人. </li>
+<li>server代表了node所在的server. </li>
+<li>resource代表相同用户的不同场景. (实际区别不大?)</li>
+</ul>
+<blockquote>
+<p>node@server/resource 三者决定一个唯一的jid.</p>
+</blockquote>
+<h2 id="信息流">信息流</h2><p>Jabber信息是xml格式, 基本交流模式 <code>client&lt;--&gt;server</code>, 比如: UserA 和 UserB 聊天, 信息流:<br><figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">client</span> UserA &lt;----&gt; <span class="keyword">server</span> &lt;----&gt; <span class="keyword">client</span> UserB.</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://ceit.uq.edu.au/content/how-xmpp-works-step-step">http://ceit.uq.edu.au/content/how-xmpp-works-step-step</a>总结了client和server交流模式. <a href="http://blog.csdn.net/huyoo/article/details/24353105">http://blog.csdn.net/huyoo/article/details/24353105</a>做了翻译. </p>
+<p>个人总结: 一次 client &amp; server 沟通, client和server 均以 <code>&lt;stream&gt;</code>开始, 服务器端开始维护一个session, <code>&lt;/stream&gt;</code>表示结束, 回收session, 关闭连接.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/11/09/xmpp-simple/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/11/09/qtip2-default/">
+  <time datetime="2014-11-08T16:24:09.000Z">
+    11月 9 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/11/09/qtip2-default/">qtip2简明教程</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="http://qtip2.com/"><strong>qtip2</strong></a>是一个非常强大的基于jquery的气泡提示工具. 它提供了一整套css+完备的配置方案. </p>
+<h3 id="下载">下载</h3><p><a href="http://qtip2.com/download"><em>http://qtip2.com/download</em></a>页面种, 你可以根据需求, 构建自己的qtip js文件.</p>
+<h3 id="用法">用法</h3><p>下面通过qtip2的默认配置文件讲解如何定义自身的qtip2.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/11/09/qtip2-default/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2014/10/14/hello-world/">
+  <time datetime="2014-10-14T10:37:57.000Z">
+    10月 14 2014
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2014/10/14/hello-world/">Hello World</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2014/10/14/hello-world/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/categories/tech/" class="prev">上一页</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>14</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/curl/">curl</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/homebrew/">homebrew</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>2</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/netstat/">netstat</a><small>1</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>2</small></li>
+  
+    <li><a href="/tags/php-fpm/">php-fpm</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sockstat/">sockstat</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/sysctl/">sysctl</a><small>1</small></li>
+  
+    <li><a href="/tags/tcp/">tcp</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>2</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2016/04/28/debug-online-network/">debug online network</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/28/curl-info/">curl info</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/how-to-keep-two-sshkey/">如何使用双SSH KEY访问gitlab</a>
+      </li>
+    
+      <li>
+        <a href="/2016/02/16/nginx-limit/">nginx limit</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

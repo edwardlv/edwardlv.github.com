@@ -70,6 +70,209 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2016/04/28/debug-online-network/">
+  <time datetime="2016-04-28T10:26:26.000Z">
+    4月 28 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/04/28/debug-online-network/">debug online network</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>线上系统面临着各种硬件, 软件, 以及外部压力, 可能会遇到cpu, memory, 硬盘, 网络等四方面瓶颈. 本文主要涉及到网络问题线上情况分析&amp;性能调优. </p>
+<h2 id="sockstat参数理解">sockstat参数理解</h2><figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ipv4 信息</span></span><br><span class="line">cat /<span class="keyword">proc</span>/net/sockstat<span class="symbol"></span><br><span class="line">sockets:</span> used 1429<span class="symbol"></span><br><span class="line">TCP:</span> inuse 308<span class="symbol"> orphan</span> 0<span class="symbol"> tw</span> 67824<span class="symbol"> alloc</span> 769<span class="symbol"> mem</span> 81<span class="symbol"></span><br><span class="line">UDP:</span> inuse 0<span class="symbol"> mem</span> 0<span class="symbol"></span><br><span class="line">UDPLITE:</span> inuse 0<span class="symbol"></span><br><span class="line">RAW:</span> inuse 0<span class="symbol"></span><br><span class="line">FRAG:</span> inuse 0<span class="symbol"> memory</span> 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>sockets: used：已使用的所有协议套接字总量</li>
+<li>TCP: inuse：正在使用（正在侦听）的TCP套接字数量。其值≤ netstat -lnt | grep ^tcp | wc -l</li>
+<li>TCP: orphan：无主（不属于任何进程）的TCP连接数（无用、待销毁的TCP socket数）</li>
+<li>TCP: tw：等待关闭的TCP连接数。其值等于netstat -ant | grep TIME_WAIT | wc –l</li>
+<li>TCP：alloc(allocated)：已分配（已建立、已申请到sk_buff）的TCP套接字数量。其值等于netstat –ant | grep ^tcp | wc –l</li>
+<li>TCP：mem：套接字缓冲区使用量（单位不详。用scp实测，速度在4803.9kB/s时：其值=11，netstat –ant 中相应的22端口的Recv-Q＝0，Send-Q≈400）</li>
+<li>UDP：inuse：正在使用的UDP套接字数量</li>
+<li>RAW：</li>
+<li>FRAG：使用的IP段数量</li>
+</ul>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/04/28/curl-info/">
+  <time datetime="2016-04-28T09:27:05.000Z">
+    4月 28 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/04/28/curl-info/">curl info</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h3 id="如何获取cURL的时间信息">如何获取cURL的时间信息</h3><p>Curl支持获取通信的一些额外信息, 具体信息可以参照man手册 <code>--write-out</code>. 具体如何实施, 请看按照如下步骤: </p>
+<p>首先, 需要提供一个信息模板文件, 内容如下, 保存为 curl.tmp.</p>
+<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line"><span class="string">\n</span></span><br><span class="line"><span class="attribute">time_namelookup</span>:  %&#123;time_namelookup&#125;<span class="string">\n</span></span><br><span class="line"><span class="attribute">time_connect</span>:  %&#123;time_connect&#125;<span class="string">\n</span></span><br><span class="line"><span class="attribute">time_appconnect</span>:  %&#123;time_appconnect&#125;<span class="string">\n</span></span><br><span class="line"><span class="attribute">time_pretransfer</span>:  %&#123;time_pretransfer&#125;<span class="string">\n</span></span><br><span class="line"><span class="attribute">time_redirect</span>:  %&#123;time_redirect&#125;<span class="string">\n</span></span><br><span class="line"><span class="attribute">time_starttransfer</span>:  %&#123;time_starttransfer&#125;<span class="string">\n</span></span><br><span class="line">----------<span class="string">\n</span></span><br><span class="line"><span class="attribute">time_total</span>:  %&#123;time_total&#125;<span class="string">\n</span></span><br><span class="line"><span class="string">\n</span></span><br></pre></td></tr></table></figure>
+<p>有了模板之后, 执行如下命令<br><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">curl -w <span class="string">"@curl.tmp"</span> -o <span class="regexp">/dev/</span><span class="literal">null</span> -s <span class="string">http:</span><span class="comment">//www.youku.com</span></span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><code>-w @curl.tmp</code> 表示: curl输出信息格式. </li>
+<li><code>-o</code> 表示: 访问结果输出</li>
+<li><code>-s</code> 表示: 不显示进度条</li>
+</ol>
+<p>最后输出结果如下: </p>
+<figure class="highlight avrasm"><table><tr><td class="code"><pre><span class="line"><span class="label">time_namelookup:</span>  <span class="number">0.015</span></span><br><span class="line"><span class="label">time_connect:</span>  <span class="number">0.018</span></span><br><span class="line"><span class="label">time_appconnect:</span>  <span class="number">0.000</span></span><br><span class="line"><span class="label">time_pretransfer:</span>  <span class="number">0.018</span></span><br><span class="line"><span class="label">time_redirect:</span>  <span class="number">0.000</span></span><br><span class="line"><span class="label">time_starttransfer:</span>  <span class="number">0.020</span></span><br><span class="line">----------</span><br><span class="line"><span class="label">time_total:</span>  <span class="number">0.020</span></span><br></pre></td></tr></table></figure>
+<h3 id="cURL中时间的含义">cURL中时间的含义</h3><p>cURL中包含的信息如man手册所说:<br><figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">time_appconnect</span><br><span class="line">               The <span class="built_in">time</span>, <span class="operator">in</span> <span class="built_in">seconds</span>, <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> SSL/SSH/etc connect/handshake <span class="built_in">to</span> <span class="operator">the</span> remote host was completed. (Added</span><br><span class="line">               <span class="operator">in</span> <span class="number">7.19</span><span class="number">.0</span>)</span><br><span class="line"></span><br><span class="line">time_connect   The <span class="built_in">time</span>, <span class="operator">in</span> <span class="built_in">seconds</span>, <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> TCP connect <span class="built_in">to</span> <span class="operator">the</span> remote host (<span class="operator">or</span> proxy) was completed.</span><br><span class="line"></span><br><span class="line">time_namelookup</span><br><span class="line">               The <span class="built_in">time</span>, <span class="operator">in</span> <span class="built_in">seconds</span>, <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> name resolving was completed.</span><br><span class="line"></span><br><span class="line">time_pretransfer</span><br><span class="line">               The  <span class="built_in">time</span>, <span class="operator">in</span> <span class="built_in">seconds</span>, <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> <span class="built_in">file</span> transfer was just about <span class="built_in">to</span> begin. This includes all pre-transfer</span><br><span class="line">               commands <span class="operator">and</span> negotiations that are specific <span class="built_in">to</span> <span class="operator">the</span> particular protocol(s) involved.</span><br><span class="line"></span><br><span class="line">time_redirect  The <span class="built_in">time</span>, <span class="operator">in</span> <span class="built_in">seconds</span>, <span class="keyword">it</span> took <span class="keyword">for</span> all redirection steps <span class="built_in">include</span> name lookup, connect, pretransfer  <span class="operator">and</span>  transfer  <span class="keyword">before</span>  <span class="operator">the</span></span><br><span class="line">               final transaction was started. time_redirect shows <span class="operator">the</span> complete execution <span class="built_in">time</span> <span class="keyword">for</span> multiple redirections. (Added <span class="operator">in</span> <span class="number">7.12</span><span class="number">.3</span>)</span><br><span class="line"></span><br><span class="line">time_starttransfer</span><br><span class="line">               The  <span class="built_in">time</span>,  <span class="operator">in</span> <span class="built_in">seconds</span>, <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> <span class="keyword">first</span> <span class="keyword">byte</span> was just about <span class="built_in">to</span> be transferred. This includes time_pre-</span><br><span class="line">               transfer <span class="operator">and</span> also <span class="operator">the</span> <span class="built_in">time</span> <span class="operator">the</span> server needed <span class="built_in">to</span> calculate <span class="operator">the</span> <span class="built_in">result</span>. 在发出请求之后，Web 服务器返回数据的第一个字节所用的时间; 包含了从客户端发送请求, 到server开始计算结果, 准备好后开始回复客户端</span><br><span class="line"></span><br><span class="line">time_total     The total <span class="built_in">time</span>, <span class="operator">in</span> <span class="built_in">seconds</span>, that <span class="operator">the</span> full operation lasted. The <span class="built_in">time</span> will be displayed <span class="operator">with</span> <span class="built_in">millisecond</span> resolution.</span><br></pre></td></tr></table></figure></p>
+<p>但是如上的解释, 太过晦涩, 尤其是 time_starttransfer, 无法理解 <code>the first byte was just about to be transferred</code> 这句话是发生在server端还是client. </p>
+<p>比较幸运的是, curl还有一个curl_easy_getinfo说的比较详细: </p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">curl_easy_perform()</span><br><span class="line">    |</span><br><span class="line">    |<span class="comment">--NAMELOOKUP</span></span><br><span class="line">    |<span class="comment">--|--CONNECT</span></span><br><span class="line">    |<span class="comment">--|--|--APPCONNECT</span></span><br><span class="line">    |<span class="comment">--|--|--|--PRETRANSFER</span></span><br><span class="line">    |<span class="comment">--|--|--|--|--STARTTRANSFER</span></span><br><span class="line">    |<span class="comment">--|--|--|--|--|--TOTAL</span></span><br><span class="line">    |<span class="comment">--|--|--|--|--|--REDIRECT</span></span><br><span class="line"></span><br><span class="line">NAMELOOKUP</span><br><span class="line"></span><br><span class="line">CURLINFO_NAMELOOKUP_TIME. The <span class="built_in">time</span> <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> name resolving was completed.</span><br><span class="line"></span><br><span class="line">CONNECT</span><br><span class="line"></span><br><span class="line">CURLINFO_CONNECT_TIME. The <span class="built_in">time</span> <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> connect <span class="built_in">to</span> <span class="operator">the</span> remote host (<span class="operator">or</span> proxy) was completed.</span><br><span class="line"></span><br><span class="line">APPCONNECT</span><br><span class="line"></span><br><span class="line">CURLINFO_APPCONNECT_TIME. The <span class="built_in">time</span> <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> SSL connect/handshake <span class="operator">with</span> <span class="operator">the</span> remote host was completed. (Added <span class="operator">in</span> <span class="operator">in</span> <span class="number">7.19</span><span class="number">.0</span>)</span><br><span class="line"></span><br><span class="line">PRETRANSFER</span><br><span class="line"></span><br><span class="line">CURLINFO_PRETRANSFER_TIME. The <span class="built_in">time</span> <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> <span class="built_in">file</span> transfer is just about <span class="built_in">to</span> begin. This includes all pre-transfer commands <span class="operator">and</span> negotiations that are specific <span class="built_in">to</span> <span class="operator">the</span> particular protocol(s) involved.</span><br><span class="line"></span><br><span class="line">STARTTRANSFER</span><br><span class="line"></span><br><span class="line">CURLINFO_STARTTRANSFER_TIME. The <span class="built_in">time</span> <span class="keyword">it</span> took <span class="built_in">from</span> <span class="operator">the</span> start <span class="keyword">until</span> <span class="operator">the</span> <span class="keyword">first</span> <span class="keyword">byte</span> is received <span class="keyword">by</span> libcurl.</span><br><span class="line"></span><br><span class="line">TOTAL</span><br><span class="line"></span><br><span class="line">CURLINFO_TOTAL_TIME. Total <span class="built_in">time</span> <span class="operator">of</span> <span class="operator">the</span> previous request.</span><br><span class="line"></span><br><span class="line">REDIRECT</span><br><span class="line"></span><br><span class="line">CURLINFO_REDIRECT_TIME. The <span class="built_in">time</span> <span class="keyword">it</span> took <span class="keyword">for</span> all redirection steps <span class="built_in">include</span> name lookup, connect, pretransfer <span class="operator">and</span> transfer <span class="keyword">before</span> final transaction was started. So, this is <span class="constant">zero</span> <span class="keyword">if</span> no redirection took place.</span><br></pre></td></tr></table></figure>
+<p><code>CURLINFO_STARTTRANSFER_TIME. The time it took from the start until the first byte is received by libcurl.</code> 说的很清楚: 直到客户端收到第一个byte的时间. </p>
+<p><a href="https://josephscott.org/archives/2011/10/timing-details-with-curl/" target="_blank" rel="external">Timing Details cURL</a><br><a href="https://curl.haxx.se/libcurl/c/curl_easy_getinfo.html" target="_blank" rel="external">curl easy getinfo</a></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/30/mac-nginx-phpfpm/">
+  <time datetime="2016-01-30T07:50:54.000Z">
+    1月 30 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>mac上可以通过homebrew安装nginx&amp;php-fpm等lnmp开发工具. 很多人安装完后, 忽视了安装后的重要提示, 无法完成一些centos下的一些常用配置, 比如: nginx开机启动; php-fpm配置路径. 本文主要介绍如何进行如上配置.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2016/01/30/mac-nginx-phpfpm/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/28/homebrew_update_error/">
+  <time datetime="2016-01-28T09:22:40.000Z">
+    1月 28 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">[edward@~]$ sudo brew update</span><br><span class="line"><span class="string">remote:</span> GitHub is offline <span class="keyword">for</span> maintenance. See <span class="string">http:</span><span class="comment">//status.github.com for more info.</span></span><br><span class="line"><span class="string">fatal:</span> unable to access <span class="string">'https://github.com/Homebrew/homebrew.git/'</span>: The requested URL returned <span class="string">error:</span> <span class="number">503</span></span><br><span class="line"><span class="string">Error:</span> Failure <span class="keyword">while</span> <span class="string">executing:</span> git pull --ff --no-rebase --quiet origin refs<span class="regexp">/heads/</span><span class="string">master:</span>refs<span class="regexp">/remotes/</span>origin/master</span><br><span class="line"></span><br><span class="line">[edward@~]$ cd `brew --prefix`</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ git remote add origin <span class="string">https:</span><span class="comment">//github.com/Homebrew/homebrew.git</span></span><br><span class="line"><span class="string">fatal:</span> remote origin already exists.</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ sudo git fetch origin</span><br><span class="line"><span class="string">Password:</span></span><br><span class="line"><span class="string">remote:</span> Counting <span class="string">objects:</span> <span class="number">12442</span>, done.</span><br><span class="line"><span class="string">remote:</span> Compressing <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">19</span>/<span class="number">19</span>), done.</span><br><span class="line"><span class="string">remote:</span> Total <span class="number">12442</span> (delta <span class="number">6318</span>), reused <span class="number">6309</span> (delta <span class="number">6309</span>), pack-reused <span class="number">6114</span></span><br><span class="line">Receiving <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">12442</span><span class="regexp">/12442), 4.27 MiB | 154.00 KiB/</span>s, done.</span><br><span class="line">Resolving <span class="string">deltas:</span> <span class="number">100</span>% (<span class="number">9664</span>/<span class="number">9664</span>), completed with <span class="number">971</span> local objects.</span><br><span class="line">From <span class="string">https:</span><span class="comment">//github.com/Homebrew/homebrew</span></span><br><span class="line">   d9e1050.<span class="number">.5</span>bcc7b1  master     -&gt; origin/master</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ sudo git reset --hard origin/master</span><br><span class="line">HEAD is now at <span class="number">5</span>bcc7b1 <span class="string">rtags:</span> boneyard</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ sudo brew update</span><br><span class="line">Already up-to-date.</span><br></pre></td></tr></table></figure>
+<p>参考文献:<br><a href="http://stackoverflow.com/questions/9370552/brew-update-failure-while-executing-git-checkout" target="_blank" rel="external">http://stackoverflow.com/questions/9370552/brew-update-failure-while-executing-git-checkout</a><br>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/03/17/MalformedURLException/">
+  <time datetime="2015-03-17T07:50:54.000Z">
+    3月 17 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>tomcat启动时会尝试绑定一个ip, 但是不使用localhost, 而是hostname查找ip. 所以通过<code>uname -n</code>获取hostname, 然后在<code>\etc\hosts</code>中配置:<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">127.0.0.1 your_hostname</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考">参考</h2><p><a href="http://stackoverflow.com/questions/20093854/jmx-agent-throws-java-net-malformedurlexception-when-host-name-is-set-to-all-num" target="_blank" rel="external">JMX agent throws java.net.MalformedURLException when host name is set to all numeric value</a></p>
+<h2 id="over">over</h2>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/03/17/mac-dev/">
   <time datetime="2015-03-17T07:50:54.000Z">
     3月 17 2015
@@ -245,17 +448,29 @@
 <h1 id="一个好的登录系统主要包含哪些模块?">一个好的登录系统主要包含哪些模块?</h1><ol>
 <li>如何登录</li>
 <li>如何保持登录状态</li>
+<li>如何管理cookie</li>
+<li>SSL/Https加密传输</li>
 <li>如何存储密码</li>
 <li>采用密码问答</li>
 <li>忘记用户名/密码模块</li>
+<li>使用nonces防止csrf攻击</li>
 <li>OpenId</li>
-<li>下一次, 如何免登录</li>
+<li>下一次, 如何免登录 “remember me”功能</li>
 <li>浏览器自动完成用户名&amp;密码</li>
 <li>secret Urls</li>
 <li>检查密码强度</li>
 <li>Email验证</li>
 </ol>
-<h1 id="分模块解析">分模块解析</h1><h3 id="如何登录">如何登录</h3><ol>
+<h1 id="分模块解析">分模块解析</h1><h3 id="如何登录">如何登录</h3><p>首先, 我们假设你已经知道如何创建一个基于Post请求的login+password的HTML, 并发送到服务器端鉴权. 本节主要展示了实践中较好的策略, 和如何避免常见安全陷阱. </p>
+<h5 id="是否使用HTTPS?_(TO_HTTPS_OR_NOT_TO_HTTPS?)">是否使用HTTPS? (TO HTTPS OR NOT TO HTTPS?)</h5><p>除非链接是安全的(通过使用SSL/Tls的HTTPS隧道), 否则你的登陆信息明文发送. 因此, 任何人监听浏览器和web server通信链路都能够读取到该登陆信息. 通常政府会监听我们的通信网络, 我们也不具备自己的专线. 因此如果要保护自己的重要信息, 使用HTTPS. </p>
+<p>总之, 保护登陆信息防止嗅探和监听的最佳实践使用HTTPS或者其他基于证书的加密链路, 或者一个证明或测试过的可靠方法(比如: Diffie-Hellman-based SRP). 任何其他方法均可以被嗅探攻击或者暴力破解(如果有salt情况)攻破. </p>
+<h5 id="(不要)自己构建基于js的加密和哈希算法">(不要)自己构建基于js的加密和哈希算法</h5><p>考虑到搭建一套SSL认证有不低的开销和一定的技术难度, 很多开发者尝试在js中哈希或者加密敏感信息, 防止在非安全链路登陆信息明文传输.</p>
+<p>但是这样做本质上是无效的, 除非和上述一些策略结合. 只是哈希密码可以邮箱的防止密码泄露, 但是他比较容易受到重放攻击和中间人攻击. </p>
+<h5 id="验证码_vs_便利性">验证码 vs 便利性</h5><p>验证码主要用于防止: 自动化的根据字典暴力破解. 当然server端频次限制也可以解决这个问题. </p>
+<p>验证码识别器通常会被人针对编写外挂, 甚至通过廉价的人工劳动识别. 推荐使用Google的reCAPTCHA, 它可以防止OCR破解, 甚至很难被人识别. </p>
+<h5 id="存储密码&amp;验证登陆">存储密码&amp;验证登陆</h5><p>尽管已经有很多公开的社工库, 我们也看到很多被泄露的用户信息, 我们必须强调: 不要再数据库中存储密码明文. 一旦用户用户的数据库被sql注入破解, 而且你的密码是明文的, 你的整个登陆系统就 game over了. </p>
+<p>如果不存储密码, 如何去检查用户发送的登陆信息呢? 使用key derivation function(类似于加密机) 哈希密码, 将结果存储于数据库中. 在</p>
+<ol>
 <li>首先明确captcha和recaptcha的区别. 这两者都比较损伤用户体验, 推荐作为保留手段. 对比captcha, recaptcha对于机器更难识别, 相对好点. </li>
 <li>浏览器<em>自动提示功能</em>虽然可以关闭. 但是用户不同网站有很多账户, 可能会忘记那么多账户&amp;密码.</li>
 <li>对于网络嗅探, 一定使用基于加密(ssl) 或者 proven &amp; tested challenge-response scheme (for example, the Diffie-Hellman-based SRP) 的方式. 其他任何其他方式都会被黑客中间窃听. 仅仅基于客户端的加密方式也是无效的, 除非结合上述两种方法. 哈希密码, 可以有效防止密码明文泄露, 但是无法防止重放攻击, 中间人攻击/劫持, 暴力破解(username, salt, hashed password). </li>
@@ -277,168 +492,11 @@
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2014/11/10/druby-im-info-by-xmpp4r/">
-  <time datetime="2014-11-10T08:10:57.000Z">
-    11月 10 2014
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p><a href="http://www.rubyfleebie.com/im-integration-with-xmpp4r-2-mistakes-to-avoid/" target="_blank" rel="external">xmpp4r advoiding this!</a><br>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2014/11/09/xmpp-simple/">
-  <time datetime="2014-11-09T15:35:47.000Z">
-    11月 9 2014
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <h2 id="什么是XMPP?">什么是XMPP?</h2><p>xmpp(The e<strong>X</strong>tensible <strong>M</strong>essaging and <strong>P</strong>resence <strong>P</strong>rotocol, aka as Jabber)一种IM通讯数据交换协议, 数据格式为XML. 该数据交换协议定义了3种角色: client, server, gate, 两两之间可以基于xmpp协议相互通信. xmpp server是基于域名服务, client@jabber.server_A 也可以将信息发送到 jabber.server_B. 此外, 通过xmpp gate甚至可以发送消息到非xmpp server. </p>
-<h2 id="什么是JID">什么是JID</h2><p>JID的格式, <strong><em>node@server/resource</em></strong>.</p>
-<ul>
-<li>node表示某个server上唯一一个人. </li>
-<li>server代表了node所在的server. </li>
-<li>resource代表相同用户的不同场景. (实际区别不大?)</li>
-</ul>
-<blockquote>
-<p>node@server/resource 三者决定一个唯一的jid.</p>
-</blockquote>
-<h2 id="信息流">信息流</h2><p>Jabber信息是xml格式, 基本交流模式 <code>client&lt;--&gt;server</code>, 比如: UserA 和 UserB 聊天, 信息流:<br><figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="keyword">client</span> UserA &lt;----&gt; <span class="keyword">server</span> &lt;----&gt; <span class="keyword">client</span> UserB.</span><br></pre></td></tr></table></figure></p>
-<p><a href="http://ceit.uq.edu.au/content/how-xmpp-works-step-step">http://ceit.uq.edu.au/content/how-xmpp-works-step-step</a>总结了client和server交流模式. <a href="http://blog.csdn.net/huyoo/article/details/24353105">http://blog.csdn.net/huyoo/article/details/24353105</a>做了翻译. </p>
-<p>个人总结: 一次 client &amp; server 沟通, client和server 均以 <code>&lt;stream&gt;</code>开始, 服务器端开始维护一个session, <code>&lt;/stream&gt;</code>表示结束, 回收session, 关闭连接.<br>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-        <div class="alignleft">
-          <a href="/2014/11/09/xmpp-simple/#more" class="more-link">阅读全文</a>
-        </div>
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2014/11/09/qtip2-default/">
-  <time datetime="2014-11-08T16:24:09.000Z">
-    11月 9 2014
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2014/11/09/qtip2-default/">qtip2简明教程</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p><a href="http://qtip2.com/"><strong>qtip2</strong></a>是一个非常强大的基于jquery的气泡提示工具. 它提供了一整套css+完备的配置方案. </p>
-<h3 id="下载">下载</h3><p><a href="http://qtip2.com/download"><em>http://qtip2.com/download</em></a>页面种, 你可以根据需求, 构建自己的qtip js文件.</p>
-<h3 id="用法">用法</h3><p>下面通过qtip2的默认配置文件讲解如何定义自身的qtip2.<br>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-        <div class="alignleft">
-          <a href="/2014/11/09/qtip2-default/#more" class="more-link">阅读全文</a>
-        </div>
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2014/10/14/hello-world/">
-  <time datetime="2014-10-14T10:37:57.000Z">
-    10月 14 2014
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2014/10/14/hello-world/">Hello World</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-        <div class="alignleft">
-          <a href="/2014/10/14/hello-world/#more" class="more-link">阅读全文</a>
-        </div>
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
 
   <nav id="pagination">
   
+  
+    <a href="/categories/tech/page/2/" class="next">下一页</a>
   
   <div class="clearfix"></div>
 </nav>
@@ -454,7 +512,7 @@
   
     <li><a href="/categories/book/">book</a><small>1</small></li>
   
-    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+    <li><a href="/categories/tech/">tech</a><small>14</small></li>
   
   </ul>
 </div>
@@ -470,19 +528,31 @@
   
     <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
   
+    <li><a href="/tags/curl/">curl</a><small>1</small></li>
+  
     <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/homebrew/">homebrew</a><small>1</small></li>
   
     <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
   
     <li><a href="/tags/jid/">jid</a><small>1</small></li>
   
-    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+    <li><a href="/tags/lnmp/">lnmp</a><small>2</small></li>
   
     <li><a href="/tags/login/">login</a><small>1</small></li>
   
-    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+    <li><a href="/tags/netstat/">netstat</a><small>1</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>2</small></li>
+  
+    <li><a href="/tags/php-fpm/">php-fpm</a><small>1</small></li>
   
     <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sockstat/">sockstat</a><small>1</small></li>
   
     <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
   
@@ -490,9 +560,13 @@
   
     <li><a href="/tags/swap/">swap</a><small>1</small></li>
   
+    <li><a href="/tags/sysctl/">sysctl</a><small>1</small></li>
+  
+    <li><a href="/tags/tcp/">tcp</a><small>1</small></li>
+  
     <li><a href="/tags/top/">top</a><small>1</small></li>
   
-    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+    <li><a href="/tags/vagrant/">vagrant</a><small>2</small></li>
   
     <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
   
@@ -516,11 +590,35 @@
   <ul class="entry">
     
       <li>
-        <a href="/2016/01/28/homebrew_update_error/"></a>
+        <a href="/2016/04/28/debug-online-network/">debug online network</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/28/curl-info/">curl info</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/how-to-keep-two-sshkey/">如何使用双SSH KEY访问gitlab</a>
+      </li>
+    
+      <li>
+        <a href="/2016/02/16/nginx-limit/">nginx limit</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a>
       </li>
     
       <li>
         <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a>
       </li>
     
       <li>
@@ -539,30 +637,6 @@
         <a href="/2014/11/27/git-source-code/">Git源码导读</a>
       </li>
     
-      <li>
-        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
-      </li>
-    
-      <li>
-        <a href="/2014/10/14/hello-world/">Hello World</a>
-      </li>
-    
   </ul>
 </div>
 
@@ -570,7 +644,7 @@
 </aside>
   <footer id="footer"><div class="copyright">
   
-  &copy; 2016 <a href="/">Edward Lv</a>
+  &copy; 2018 <a href="/">Edward Lv</a>
   
 </div>
 <div class="theme-copyright">

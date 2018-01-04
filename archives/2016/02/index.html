@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+  <meta name="description" content="码出我天地.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Code says.">
+<meta property="og:url" content="http://edwardlv.github.io/archives/2016/02/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="码出我天地.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Code says.">
+<meta name="twitter:description" content="码出我天地.">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/02/16/nginx-limit/">
+  <time datetime="2016-02-16T03:28:19.000Z">
+    2月 16 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/02/16/nginx-limit/">nginx limit</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p><a href="https://segmentfault.com/a/1190000002681890" target="_blank" rel="external">https://segmentfault.com/a/1190000002681890</a><br><a href="http://huoding.com/2015/03/20/423" target="_blank" rel="external">http://huoding.com/2015/03/20/423</a></p>
+<p>ERROR 1118 (42000): Row size too large. The maximum row size for the used table type, not counting BLOBs, is 65535. You have to change some columns to TEXT or BLOBs<br>mysql&gt;<br>mysql&gt;<br>mysql&gt; create table <code>order_cache</code> (<br>    -&gt;   <code>id</code> bigint(20) not null AUTO_INCREMENT,<br>    -&gt;   <code>tbl_id</code> bigint(20) not null default 0 comment ‘表id’,<br>    -&gt;   <code>tbl_name</code> varchar(32) not null default ‘’ comment ‘表名’,<br>    -&gt;   <code>status</code> tinyint(3) not null default 0,<br>    -&gt;   <code>status1</code> tinyint(3) not null default 0,<br>    -&gt;   <code>status2</code> tinyint(3) not null default 0,<br>    -&gt;   <code>detail</code> varchar(21806) not null default ‘’,<br>    -&gt;   Primary key (<code>id</code>),<br>    -&gt;   key (<code>tbl_id</code>, <code>tbl_name</code>)<br>    -&gt; )ENGINE=InnoDB AUTO_INCREMENT=1000000 DEFAULT CHARSET=utf8 COMMENT=’详情信息缓存’;<br>Query OK, 0 rows affected (0.10 sec)</p>
+<p>(65535-8-8-(32*3+1)-1-1-2)/3 = 21806</p>
+<p>create table <code>order_cache2</code> (<br>  <code>id</code> bigint(20) not null AUTO_INCREMENT,<br>  <code>tbl_id</code> bigint(20) not null default 0 comment ‘表id’,<br>  <code>tbl_name</code> varchar(32) not null default ‘’ comment ‘表名’,<br>  <code>status</code> tinyint(3) not null default 0,<br>  <code>status2</code> tinyint(3) not null default 0,<br>  <code>detail</code> varchar(21806) not null default ‘’,<br>  Primary key (<code>id</code>),<br>  key (<code>tbl_id</code>, <code>tbl_name</code>)<br>)ENGINE=InnoDB AUTO_INCREMENT=1000000 DEFAULT CHARSET=utf8 COMMENT=’详情信息缓存’;</p>
+<p>(65535-8-(32*3+1)-1-2)/3 = 21809<br>create table <code>order_cache3</code> (<br>  <code>id</code> bigint(20) not null AUTO_INCREMENT,<br>  <code>tbl_name</code> varchar(32) not null default ‘’ comment ‘表名’,<br>  <code>status</code> tinyint(3) not null default 0,<br>  <code>detail</code> varchar(21809) not null default ‘’,<br>  Primary key (<code>id</code>),<br>  key (<code>tbl_name</code>)<br>)ENGINE=InnoDB AUTO_INCREMENT=1000000 DEFAULT CHARSET=utf8 COMMENT=’详情信息缓存’;</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>14</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/curl/">curl</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/homebrew/">homebrew</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>2</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/netstat/">netstat</a><small>1</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>2</small></li>
+  
+    <li><a href="/tags/php-fpm/">php-fpm</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sockstat/">sockstat</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/sysctl/">sysctl</a><small>1</small></li>
+  
+    <li><a href="/tags/tcp/">tcp</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>2</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2016/04/28/debug-online-network/">debug online network</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/28/curl-info/">curl info</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/how-to-keep-two-sshkey/">如何使用双SSH KEY访问gitlab</a>
+      </li>
+    
+      <li>
+        <a href="/2016/02/16/nginx-limit/">nginx limit</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

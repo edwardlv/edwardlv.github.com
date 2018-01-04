@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>mac下nginx开机启动&amp;phpfpm配置路径 | Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+    <meta name="description" content="mac上可以通过homebrew安装nginx&amp;amp;php-fpm等lnmp开发工具. 很多人安装完后, 忽视了安装后的重要提示, 无法完成一些centos下的一些常用配置, 比如: nginx开机启动; php-fpm配置路径. 本文主要介绍如何进行如上配置.">
+  
+  <meta name="description" content="mac上可以通过homebrew安装nginx&amp;amp;php-fpm等lnmp开发工具. 很多人安装完后, 忽视了安装后的重要提示, 无法完成一些centos下的一些常用配置, 比如: nginx开机启动; php-fpm配置路径. 本文主要介绍如何进行如上配置.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac下nginx开机启动&phpfpm配置路径">
+<meta property="og:url" content="http://edwardlv.github.io/2016/01/30/mac-nginx-phpfpm/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="mac上可以通过homebrew安装nginx&amp;amp;php-fpm等lnmp开发工具. 很多人安装完后, 忽视了安装后的重要提示, 无法完成一些centos下的一些常用配置, 比如: nginx开机启动; php-fpm配置路径. 本文主要介绍如何进行如上配置.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mac下nginx开机启动&phpfpm配置路径">
+<meta name="twitter:description" content="mac上可以通过homebrew安装nginx&amp;amp;php-fpm等lnmp开发工具. 很多人安装完后, 忽视了安装后的重要提示, 无法完成一些centos下的一些常用配置, 比如: nginx开机启动; php-fpm配置路径. 本文主要介绍如何进行如上配置.">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/01/30/mac-nginx-phpfpm/">
+  <time datetime="2016-01-30T07:50:54.000Z">
+    1月 30 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">mac下nginx开机启动&amp;phpfpm配置路径</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>mac上可以通过homebrew安装nginx&amp;php-fpm等lnmp开发工具. 很多人安装完后, 忽视了安装后的重要提示, 无法完成一些centos下的一些常用配置, 比如: nginx开机启动; php-fpm配置路径. 本文主要介绍如何进行如上配置.<br><a id="more"></a></p>
+<h2 id="如何配置nginx开机自启动-">如何配置nginx开机自启动.</h2><p>下面是homebrew安装nginx的流程. 记录了我们需求里面的所有信息.<br><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">=<span class="function">=&gt;</span> Installing nginx <span class="attribute">dependency</span>: pcre</span><br><span class="line">=<span class="function">=&gt;</span> Downloading <span class="attribute">https</span>:<span class="regexp">//</span>homebrew.bintray.com/bottles/pcre-<span class="number">8.36</span>.yosemite.bottle.tar.gz</span><br><span class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span> <span class="number">100.0</span>%</span><br><span class="line">=<span class="function">=&gt;</span> Pouring pcre-<span class="number">8.36</span>.yosemite.bottle.tar.gz</span><br><span class="line">🍺  /usr/local/Cellar/pcre/<span class="number">8.36</span>: <span class="number">146</span> files, <span class="number">5.9</span>M</span><br><span class="line">=<span class="function">=&gt;</span> Installing nginx</span><br><span class="line">=<span class="function">=&gt;</span> Downloading <span class="attribute">https</span>:<span class="regexp">//</span>homebrew.bintray.com/bottles/nginx-<span class="number">1.6</span><span class="number">.2</span>.yosemite.bottle<span class="number">.1</span>.tar.gz</span><br><span class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span> <span class="number">100.0</span>%</span><br><span class="line">=<span class="function">=&gt;</span> Pouring nginx-<span class="number">1.6</span><span class="number">.2</span>.yosemite.bottle<span class="number">.1</span>.tar.gz</span><br><span class="line">=<span class="function">=&gt;</span> Caveats</span><br><span class="line">Docroot <span class="attribute">is</span>: /usr/local/<span class="reserved">var</span>/www</span><br><span class="line"></span><br><span class="line">The <span class="reserved">default</span> port has been set <span class="keyword">in</span> /usr/local/etc/nginx/nginx.conf to <span class="number">8080</span> so that</span><br><span class="line">nginx can run without sudo.</span><br><span class="line"></span><br><span class="line">To have launchd start nginx at <span class="attribute">login</span>:</span><br><span class="line">    ln -sfv <span class="regexp">/usr/local/opt/nginx/</span>*.plist ~/Library/LaunchAgents</span><br><span class="line">    Then to load nginx <span class="attribute">now</span>:</span><br><span class="line">        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist</span><br><span class="line">        Or, <span class="keyword">if</span> you don<span class="string">'t want/need launchctl, you can just run:</span><br><span class="line">            nginx</span><br><span class="line">            ==&gt; Summary</span><br><span class="line">            🍺  /usr/local/Cellar/nginx/1.6.2: 7 files, 920K</span></span><br></pre></td></tr></table></figure></p>
+<p>首先, 安装日志提示我们nginx默认的web路径: <code>/usr/local/var/www</code>; 默认配置路径<code>/usr/local/etc/nginx/</code>端口号是8080.<br>然后, 提示了如何登陆后自启动nginx, 但是安装信息里面提供的方法有误. </p>
+<p>开机自启动需要用到 <code>launchctl</code> 命令. <code>launchctl</code>可以设定不同账户下的五种不同脚本. nginx要使用绑定端口, 所以必须<code>sudo launchctl</code>; 对应的脚本也必须是仅root用户权限.<br>五种不同的脚本, 以目录作为区分:<br><figure class="highlight mizar"><table><tr><td class="code"><pre><span class="line">~/Library/LaunchAgents         Per-user agents <span class="keyword">provided</span> <span class="keyword">by</span> the user.</span><br><span class="line">/Library/LaunchAgents          Per-user agents <span class="keyword">provided</span> <span class="keyword">by</span> the administrator.</span><br><span class="line">/Library/LaunchDaemons         System-wide daemons <span class="keyword">provided</span> <span class="keyword">by</span> the administrator.</span><br><span class="line">/System/Library/LaunchAgents   Per-user agents <span class="keyword">provided</span> <span class="keyword">by</span> OS X.</span><br><span class="line">/System/Library/LaunchDaemons  System-wide daemons <span class="keyword">provided</span> <span class="keyword">by</span> OS X.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"># &#35774;&#32622;&#33050;&#26412;&#26435;&#38480;&#38;&#29992;&#25143;&#10;sudo chmod 600 /usr/local/opt/nginx/*.plist&#10;sudo chown root /usr/local/opt/nginx/*.plist&#10;&#10;# &#36719;&#38142;&#21040; &#31995;&#32479;deamon&#30446;&#24405;&#10;sudo ln -sfv /usr/local/opt/nginx/*.plist /Library/LaunchDaemons&#10;&#10;# &#21152;&#36733;&#21040;launchctl&#26381;&#21153;&#10;sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist</span><br></pre></td></tr></table></figure>
+<h2 id="php-fpm的配置路径">php-fpm的配置路径</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">ln -s <span class="regexp">/private/</span>etc<span class="regexp">/php-fpm.conf.default /</span><span class="keyword">private</span><span class="regexp">/etc/</span>php-fpm.conf</span><br><span class="line"><span class="regexp">/private/</span>etc/php-fpm.conf.<span class="keyword">default</span></span><br><span class="line"><span class="regexp">/usr/</span>var<span class="regexp">/log/</span>php-fpm.log</span><br></pre></td></tr></table></figure>
+<h2 id="over">over</h2>
+    
+  </div>
+  <footer>
+    
+      
+  <div class="categories">
+    <a class="categories-link" href="/categories/tech/">tech</a>
+  </div>
+
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/nginx/">nginx</a>, <a class="tags-link" href="/tags/php-fpm/">php-fpm</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="mac下nginx开机启动&amp;phpfpm配置路径">
+  </div>
+</section>
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>14</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/curl/">curl</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/homebrew/">homebrew</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>2</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/netstat/">netstat</a><small>1</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>2</small></li>
+  
+    <li><a href="/tags/php-fpm/">php-fpm</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sockstat/">sockstat</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/sysctl/">sysctl</a><small>1</small></li>
+  
+    <li><a href="/tags/tcp/">tcp</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>2</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2016/04/28/debug-online-network/">debug online network</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/28/curl-info/">curl info</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/how-to-keep-two-sshkey/">如何使用双SSH KEY访问gitlab</a>
+      </li>
+    
+      <li>
+        <a href="/2016/02/16/nginx-limit/">nginx limit</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

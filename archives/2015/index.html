@@ -107,6 +107,41 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2015/03/17/MalformedURLException/">
+  <time datetime="2015-03-17T07:50:54.000Z">
+    3月 17 2015
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>tomcat启动时会尝试绑定一个ip, 但是不使用localhost, 而是hostname查找ip. 所以通过<code>uname -n</code>获取hostname, 然后在<code>\etc\hosts</code>中配置:<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">127.0.0.1 your_hostname</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考">参考</h2><p><a href="http://stackoverflow.com/questions/20093854/jmx-agent-throws-java-net-malformedurlexception-when-host-name-is-set-to-all-num" target="_blank" rel="external">JMX agent throws java.net.MalformedURLException when host name is set to all numeric value</a></p>
+<h2 id="over">over</h2>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/01/04/top-wa-is-so-high/">
   <time datetime="2015-01-04T10:37:57.000Z">
     1月 4 2015
@@ -162,7 +197,7 @@
   
     <li><a href="/categories/book/">book</a><small>1</small></li>
   
-    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+    <li><a href="/categories/tech/">tech</a><small>14</small></li>
   
   </ul>
 </div>
@@ -178,19 +213,31 @@
   
     <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
   
+    <li><a href="/tags/curl/">curl</a><small>1</small></li>
+  
     <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/homebrew/">homebrew</a><small>1</small></li>
   
     <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
   
     <li><a href="/tags/jid/">jid</a><small>1</small></li>
   
-    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+    <li><a href="/tags/lnmp/">lnmp</a><small>2</small></li>
   
     <li><a href="/tags/login/">login</a><small>1</small></li>
   
-    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+    <li><a href="/tags/netstat/">netstat</a><small>1</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>2</small></li>
+  
+    <li><a href="/tags/php-fpm/">php-fpm</a><small>1</small></li>
   
     <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sockstat/">sockstat</a><small>1</small></li>
   
     <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
   
@@ -198,9 +245,13 @@
   
     <li><a href="/tags/swap/">swap</a><small>1</small></li>
   
+    <li><a href="/tags/sysctl/">sysctl</a><small>1</small></li>
+  
+    <li><a href="/tags/tcp/">tcp</a><small>1</small></li>
+  
     <li><a href="/tags/top/">top</a><small>1</small></li>
   
-    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+    <li><a href="/tags/vagrant/">vagrant</a><small>2</small></li>
   
     <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
   
@@ -224,11 +275,35 @@
   <ul class="entry">
     
       <li>
-        <a href="/2016/01/28/homebrew_update_error/"></a>
+        <a href="/2016/04/28/debug-online-network/">debug online network</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/28/curl-info/">curl info</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/how-to-keep-two-sshkey/">如何使用双SSH KEY访问gitlab</a>
+      </li>
+    
+      <li>
+        <a href="/2016/02/16/nginx-limit/">nginx limit</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a>
       </li>
     
       <li>
         <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a>
       </li>
     
       <li>
@@ -247,30 +322,6 @@
         <a href="/2014/11/27/git-source-code/">Git源码导读</a>
       </li>
     
-      <li>
-        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
-      </li>
-    
-      <li>
-        <a href="/2014/10/14/hello-world/">Hello World</a>
-      </li>
-    
   </ul>
 </div>
 
@@ -278,7 +329,7 @@
 </aside>
   <footer id="footer"><div class="copyright">
   
-  &copy; 2016 <a href="/">Edward Lv</a>
+  &copy; 2018 <a href="/">Edward Lv</a>
   
 </div>
 <div class="theme-copyright">

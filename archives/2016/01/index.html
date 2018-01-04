@@ -70,15 +70,52 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2016/01/30/mac-nginx-phpfpm/">
+  <time datetime="2016-01-30T07:50:54.000Z">
+    1月 30 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>mac上可以通过homebrew安装nginx&amp;php-fpm等lnmp开发工具. 很多人安装完后, 忽视了安装后的重要提示, 无法完成一些centos下的一些常用配置, 比如: nginx开机启动; php-fpm配置路径. 本文主要介绍如何进行如上配置.<br>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+        <div class="alignleft">
+          <a href="/2016/01/30/mac-nginx-phpfpm/#more" class="more-link">阅读全文</a>
+        </div>
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2016/01/28/homebrew_update_error/">
-  <time datetime="2016-01-28T02:47:54.000Z">
+  <time datetime="2016-01-28T09:22:40.000Z">
     1月 28 2016
   </time>
 </a>
     
     
   
-    <h1 class="title"><a href="/2016/01/28/homebrew_update_error/"></a></h1>
+    <h1 class="title"><a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a></h1>
   
 
   </header>
@@ -86,6 +123,8 @@
   <div class="entry">
     
       <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">[edward@~]$ sudo brew update</span><br><span class="line"><span class="string">remote:</span> GitHub is offline <span class="keyword">for</span> maintenance. See <span class="string">http:</span><span class="comment">//status.github.com for more info.</span></span><br><span class="line"><span class="string">fatal:</span> unable to access <span class="string">'https://github.com/Homebrew/homebrew.git/'</span>: The requested URL returned <span class="string">error:</span> <span class="number">503</span></span><br><span class="line"><span class="string">Error:</span> Failure <span class="keyword">while</span> <span class="string">executing:</span> git pull --ff --no-rebase --quiet origin refs<span class="regexp">/heads/</span><span class="string">master:</span>refs<span class="regexp">/remotes/</span>origin/master</span><br><span class="line"></span><br><span class="line">[edward@~]$ cd `brew --prefix`</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ git remote add origin <span class="string">https:</span><span class="comment">//github.com/Homebrew/homebrew.git</span></span><br><span class="line"><span class="string">fatal:</span> remote origin already exists.</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ sudo git fetch origin</span><br><span class="line"><span class="string">Password:</span></span><br><span class="line"><span class="string">remote:</span> Counting <span class="string">objects:</span> <span class="number">12442</span>, done.</span><br><span class="line"><span class="string">remote:</span> Compressing <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">19</span>/<span class="number">19</span>), done.</span><br><span class="line"><span class="string">remote:</span> Total <span class="number">12442</span> (delta <span class="number">6318</span>), reused <span class="number">6309</span> (delta <span class="number">6309</span>), pack-reused <span class="number">6114</span></span><br><span class="line">Receiving <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">12442</span><span class="regexp">/12442), 4.27 MiB | 154.00 KiB/</span>s, done.</span><br><span class="line">Resolving <span class="string">deltas:</span> <span class="number">100</span>% (<span class="number">9664</span>/<span class="number">9664</span>), completed with <span class="number">971</span> local objects.</span><br><span class="line">From <span class="string">https:</span><span class="comment">//github.com/Homebrew/homebrew</span></span><br><span class="line">   d9e1050.<span class="number">.5</span>bcc7b1  master     -&gt; origin/master</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ sudo git reset --hard origin/master</span><br><span class="line">HEAD is now at <span class="number">5</span>bcc7b1 <span class="string">rtags:</span> boneyard</span><br><span class="line">[edward@<span class="regexp">/usr/</span>local]$ sudo brew update</span><br><span class="line">Already up-to-date.</span><br></pre></td></tr></table></figure>
+<p>参考文献:<br><a href="http://stackoverflow.com/questions/9370552/brew-update-failure-while-executing-git-checkout" target="_blank" rel="external">http://stackoverflow.com/questions/9370552/brew-update-failure-while-executing-git-checkout</a><br>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
     
   </div>
   <footer class="end-sep">
@@ -117,7 +156,7 @@
   
     <li><a href="/categories/book/">book</a><small>1</small></li>
   
-    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+    <li><a href="/categories/tech/">tech</a><small>14</small></li>
   
   </ul>
 </div>
@@ -133,19 +172,31 @@
   
     <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
   
+    <li><a href="/tags/curl/">curl</a><small>1</small></li>
+  
     <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/homebrew/">homebrew</a><small>1</small></li>
   
     <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
   
     <li><a href="/tags/jid/">jid</a><small>1</small></li>
   
-    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+    <li><a href="/tags/lnmp/">lnmp</a><small>2</small></li>
   
     <li><a href="/tags/login/">login</a><small>1</small></li>
   
-    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+    <li><a href="/tags/netstat/">netstat</a><small>1</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>2</small></li>
+  
+    <li><a href="/tags/php-fpm/">php-fpm</a><small>1</small></li>
   
     <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sockstat/">sockstat</a><small>1</small></li>
   
     <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
   
@@ -153,9 +204,13 @@
   
     <li><a href="/tags/swap/">swap</a><small>1</small></li>
   
+    <li><a href="/tags/sysctl/">sysctl</a><small>1</small></li>
+  
+    <li><a href="/tags/tcp/">tcp</a><small>1</small></li>
+  
     <li><a href="/tags/top/">top</a><small>1</small></li>
   
-    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+    <li><a href="/tags/vagrant/">vagrant</a><small>2</small></li>
   
     <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
   
@@ -179,11 +234,35 @@
   <ul class="entry">
     
       <li>
-        <a href="/2016/01/28/homebrew_update_error/"></a>
+        <a href="/2016/04/28/debug-online-network/">debug online network</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/28/curl-info/">curl info</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/how-to-keep-two-sshkey/">如何使用双SSH KEY访问gitlab</a>
+      </li>
+    
+      <li>
+        <a href="/2016/02/16/nginx-limit/">nginx limit</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a>
       </li>
     
       <li>
         <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a>
       </li>
     
       <li>
@@ -202,30 +281,6 @@
         <a href="/2014/11/27/git-source-code/">Git源码导读</a>
       </li>
     
-      <li>
-        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
-      </li>
-    
-      <li>
-        <a href="/2014/10/14/hello-world/">Hello World</a>
-      </li>
-    
   </ul>
 </div>
 
@@ -233,7 +288,7 @@
 </aside>
   <footer id="footer"><div class="copyright">
   
-  &copy; 2016 <a href="/">Edward Lv</a>
+  &copy; 2018 <a href="/">Edward Lv</a>
   
 </div>
 <div class="theme-copyright">

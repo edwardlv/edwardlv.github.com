@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>如何使用双SSH KEY访问gitlab | Code says.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="Edward Lv">
+  
+  
+    <meta name="description" content="公司的自建gitlab托管代码, 自己的代码又托管在github上. 为了分离, 想自己制定key访问gitlab.首先要生成一个新的ssh-key, key名: my_gitlab_rsa
+ssh-keygen -t rsa -C &#39;yourname@gitlab.com&#39;
+其次, 将my_gitlab_rsa.pub文件, 设置为gitlab我个人的ssh-key. 
+然后, 设置本地机器ss">
+  
+  <meta name="description" content="公司的自建gitlab托管代码, 自己的代码又托管在github上. 为了分离, 想自己制定key访问gitlab.首先要生成一个新的ssh-key, key名: my_gitlab_rsa
+ssh-keygen -t rsa -C &apos;yourname@gitlab.com&apos;
+其次, 将my_gitlab_rsa.pub文件, 设置为gitlab我个人的ssh-key. 
+然后, 设置本地机器ss">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用双SSH KEY访问gitlab">
+<meta property="og:url" content="http://edwardlv.github.io/2016/03/14/how-to-keep-two-sshkey/index.html">
+<meta property="og:site_name" content="Code says.">
+<meta property="og:description" content="公司的自建gitlab托管代码, 自己的代码又托管在github上. 为了分离, 想自己制定key访问gitlab.首先要生成一个新的ssh-key, key名: my_gitlab_rsa
+ssh-keygen -t rsa -C &apos;yourname@gitlab.com&apos;
+其次, 将my_gitlab_rsa.pub文件, 设置为gitlab我个人的ssh-key. 
+然后, 设置本地机器ss">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何使用双SSH KEY访问gitlab">
+<meta name="twitter:description" content="公司的自建gitlab托管代码, 自己的代码又托管在github上. 为了分离, 想自己制定key访问gitlab.首先要生成一个新的ssh-key, key名: my_gitlab_rsa
+ssh-keygen -t rsa -C &apos;yourname@gitlab.com&apos;
+其次, 将my_gitlab_rsa.pub文件, 设置为gitlab我个人的ssh-key. 
+然后, 设置本地机器ss">
+  
+    <link rel="alternate" href="/atom.xml" title="Code says." type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/edwardlv.blog.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">Code says.</a></h1>
+    <p><a href="/">Code knows everything.</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/categories/tech">Tech</a></li>
+      
+        <li><a href="/categories/book">Book</a></li>
+      
+        <li><a href="/categories/life">Life</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/03/14/how-to-keep-two-sshkey/">
+  <time datetime="2016-03-14T04:11:20.000Z">
+    3月 14 2016
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">如何使用双SSH KEY访问gitlab</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>公司的自建gitlab托管代码, 自己的代码又托管在github上. 为了分离, 想自己制定key访问gitlab.<br>首先要生成一个新的ssh-key, key名: my_gitlab_rsa</p>
+<figure class="highlight mathematica"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -<span class="keyword">C</span> <span class="string">'yourname@gitlab.com'</span></span><br></pre></td></tr></table></figure>
+<p>其次, 将<code>my_gitlab_rsa.pub</code>文件, 设置为gitlab我个人的ssh-key. </p>
+<p>然后, 设置本地机器ssh_config. </p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">vim ~<span class="regexp">/.ssh/config</span></span><br><span class="line"><span class="constant">Host </span>gitlab_ssh</span><br><span class="line">  <span class="constant">HostName </span>gitlab.com</span><br><span class="line">  <span class="constant">User </span>git</span><br><span class="line">  <span class="constant">IdentityFile </span>~<span class="regexp">/.ssh/my</span>_gitlab_rsa</span><br></pre></td></tr></table></figure>
+<p>测试gitlabkey是否生效:<br><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="title">ssh</span> -T git<span class="variable">@gitlab_ssh</span></span><br></pre></td></tr></table></figure></p>
+<p>最后, 修改自己的origin源为新的地址. (目前只知道ssh方式)</p>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">vim <span class="keyword">project</span><span class="regexp">/.git/</span>config</span><br></pre></td></tr></table></figure>
+<p><code>[remote &quot;origin&quot;]</code> url中: <code>git@gitlab.com:pay-php/pay.git</code> 修改为 <code>git@gitlab_ssh:pay-php/pay.git</code></p>
+<h2 id="Gitlab配置ssh连接"><a href="http://blog.csdn.net/black_ox/article/details/17753943" target="_blank" rel="external">Gitlab配置ssh连接</a></h2><h2 id="Specify_an_SSH_key_for_git_push_for_a_given_domain"><a href="http://stackoverflow.com/questions/7927750/specify-an-ssh-key-for-git-push-for-a-given-domain" target="_blank" rel="external">Specify an SSH key for git push for a given domain</a></h2><p>本文作者: <a href="http://edwardlv.github.io" target="_blank" rel="external">EdwardLv</a></p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">评论</h1>
+  <div class="ds-thread" data-title="如何使用双SSH KEY访问gitlab">
+  </div>
+</section>
+</div>
+  </div>
+  <aside id="sidebar">
+
+  
+<div class="widget tag first">
+  <h3 class="title">categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/book/">book</a><small>1</small></li>
+  
+    <li><a href="/categories/tech/">tech</a><small>14</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/God-Father/">God Father</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/curl/">curl</a><small>1</small></li>
+  
+    <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/homebrew/">homebrew</a><small>1</small></li>
+  
+    <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
+  
+    <li><a href="/tags/jid/">jid</a><small>1</small></li>
+  
+    <li><a href="/tags/lnmp/">lnmp</a><small>2</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>1</small></li>
+  
+    <li><a href="/tags/netstat/">netstat</a><small>1</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>2</small></li>
+  
+    <li><a href="/tags/php-fpm/">php-fpm</a><small>1</small></li>
+  
+    <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sockstat/">sockstat</a><small>1</small></li>
+  
+    <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
+  
+    <li><a href="/tags/supervisor/">supervisor</a><small>1</small></li>
+  
+    <li><a href="/tags/swap/">swap</a><small>1</small></li>
+  
+    <li><a href="/tags/sysctl/">sysctl</a><small>1</small></li>
+  
+    <li><a href="/tags/tcp/">tcp</a><small>1</small></li>
+  
+    <li><a href="/tags/top/">top</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>2</small></li>
+  
+    <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
+  
+    <li><a href="/tags/wa/">wa</a><small>1</small></li>
+  
+    <li><a href="/tags/widget/">widget</a><small>1</small></li>
+  
+    <li><a href="/tags/xmpp/">xmpp</a><small>2</small></li>
+  
+    <li><a href="/tags/xmpp4r/">xmpp4r</a><small>1</small></li>
+  
+    <li><a href="/tags/教父/">教父</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最近更新</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2016/04/28/debug-online-network/">debug online network</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/28/curl-info/">curl info</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/how-to-keep-two-sshkey/">如何使用双SSH KEY访问gitlab</a>
+      </li>
+    
+      <li>
+        <a href="/2016/02/16/nginx-limit/">nginx limit</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a>
+      </li>
+    
+      <li>
+        <a href="/2015/01/04/top-wa-is-so-high/">top中, wa长期100%</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/25/simple-supervisord/">简明 supervisor</a>
+      </li>
+    
+      <li>
+        <a href="/2014/12/06/how-to-delete-sublime-project/">how to delete sublime project</a>
+      </li>
+    
+      <li>
+        <a href="/2014/11/27/git-source-code/">Git源码导读</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+</aside>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2018 <a href="/">Edward Lv</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://edwardlv.github.com/" target="_blank">Edward Lv</a>
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = { short_name: 'edward' };
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

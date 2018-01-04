@@ -89,7 +89,8 @@
 <li>参照<a href="http://coolestguidesontheplanet.com/getting-started-vagrant-os-osx-10-9-mavericks/" target="_blank" rel="external">Getting Started with Vagrant on OSX 10.10 Yosemite</a>配置. <figure class="highlight"><table><tr><td class="code"><pre><span class="line">cd ~/vg_centos&#10;vagrant init    # &#21021;&#22987;&#21270;&#30446;&#24405;&#10;vagrant box add chef/centos-6.5     # &#23433;&#35013;centos&#34394;&#25311;&#26426;&#10;vim ~/vg_centos/Vagrantfile&#10;    config.vm.box = &#34;base&#34;&#10;    config.vm.box = &#34;chef/centos-6.5&#34;&#10;    config.vm.network &#34;private_network&#34;, ip: &#34;192.168.33.10&#34;&#10;    # config.vm.synced_folder&#21487;&#20197;&#19981;&#37197;&#32622;, &#22240;&#20026; ~/vg_centos &#33258;&#36523;&#24050;&#32463;&#21644; centos: /vagrant/&#30446;&#24405;&#26144;&#23556;. &#10;vagrant up  # &#21551;&#21160;&#34394;&#25311;&#26426;&#10;vagrant ssh # &#36830;&#25509;&#34394;&#25311;&#26426;&#10;# &#25104;&#21151;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="2-_centos下安装lnmp">2. centos下安装lnmp</h2><p>当前环境下没有man手册.<br><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">yum <span class="keyword">install</span> man</span><br><span class="line">yum <span class="keyword">install</span> man-pages</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-_centos下安装lnmp">2. centos下安装lnmp</h2><p>centos的yum源比较追求稳定, 很多新版本的软件都没有. 因此推荐大家更新新的源<code>Webtatic Yum Repository(https://webtatic.com/projects/yum-repository/)</code>, 下面是更新centos6.*版本命令<br><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">rpm -<span class="constant">Uvh </span><span class="symbol">https:</span>/<span class="regexp">/dl.fedoraproject.org/pub</span><span class="regexp">/epel/epel</span>-release-latest-<span class="number">6</span>.noarch.rpm</span><br><span class="line">rpm -<span class="constant">Uvh </span><span class="symbol">https:</span>/<span class="regexp">/mirror.webtatic.com/yum</span><span class="regexp">/el6/latest</span>.rpm</span><br></pre></td></tr></table></figure></p>
+<p>当前环境下没有man手册.<br><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">yum <span class="keyword">install</span> man</span><br><span class="line">yum <span class="keyword">install</span> man-pages</span><br></pre></td></tr></table></figure></p>
 <p><a href="http://shmily2038.iteye.com/blog/1860063" target="_blank" rel="external">安装nginx</a><br><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">rpm -ivh <span class="symbol">http:</span>/<span class="regexp">/nginx.org/packages</span><span class="regexp">/centos/</span><span class="number">6</span>/noarch/<span class="constant">RPMS/</span>nginx-release-centos-<span class="number">6</span>-<span class="number">0</span>.el6.ngx.noarch.rpm</span><br><span class="line">yum install nginx</span><br></pre></td></tr></table></figure></p>
 <p>安装mysql<br><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">yum <span class="operator"><span class="keyword">install</span> mysql55w</span><br><span class="line">yum <span class="keyword">install</span> mysql55w-<span class="keyword">server</span></span></span><br></pre></td></tr></table></figure></p>
 <p><a href="https://webtatic.com/packages/php56/" target="_blank" rel="external">安装php</a><br><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">rpm -Uvh https:<span class="comment">//mirror.webtatic.com/yum/el6/latest.rpm</span></span><br><span class="line">yum install php56w php56w-opcache php56w-fpm php56w-mysql php56w-pdo</span><br><span class="line">yum <span class="built_in">list</span> php56* <span class="preprocessor"># 按需安装</span></span><br></pre></td></tr></table></figure></p>
@@ -131,7 +132,7 @@
   
     <li><a href="/categories/book/">book</a><small>1</small></li>
   
-    <li><a href="/categories/tech/">tech</a><small>9</small></li>
+    <li><a href="/categories/tech/">tech</a><small>14</small></li>
   
   </ul>
 </div>
@@ -147,19 +148,31 @@
   
     <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
   
+    <li><a href="/tags/curl/">curl</a><small>1</small></li>
+  
     <li><a href="/tags/druby/">druby</a><small>1</small></li>
+  
+    <li><a href="/tags/homebrew/">homebrew</a><small>1</small></li>
   
     <li><a href="/tags/iostat/">iostat</a><small>1</small></li>
   
     <li><a href="/tags/jid/">jid</a><small>1</small></li>
   
-    <li><a href="/tags/lnmp/">lnmp</a><small>1</small></li>
+    <li><a href="/tags/lnmp/">lnmp</a><small>2</small></li>
   
     <li><a href="/tags/login/">login</a><small>1</small></li>
   
-    <li><a href="/tags/osx/">osx</a><small>1</small></li>
+    <li><a href="/tags/netstat/">netstat</a><small>1</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/osx/">osx</a><small>2</small></li>
+  
+    <li><a href="/tags/php-fpm/">php-fpm</a><small>1</small></li>
   
     <li><a href="/tags/qtip2/">qtip2</a><small>1</small></li>
+  
+    <li><a href="/tags/sockstat/">sockstat</a><small>1</small></li>
   
     <li><a href="/tags/sublime/">sublime</a><small>1</small></li>
   
@@ -167,9 +180,13 @@
   
     <li><a href="/tags/swap/">swap</a><small>1</small></li>
   
+    <li><a href="/tags/sysctl/">sysctl</a><small>1</small></li>
+  
+    <li><a href="/tags/tcp/">tcp</a><small>1</small></li>
+  
     <li><a href="/tags/top/">top</a><small>1</small></li>
   
-    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+    <li><a href="/tags/vagrant/">vagrant</a><small>2</small></li>
   
     <li><a href="/tags/vmstat/">vmstat</a><small>1</small></li>
   
@@ -193,11 +210,35 @@
   <ul class="entry">
     
       <li>
-        <a href="/2016/01/28/homebrew_update_error/"></a>
+        <a href="/2016/04/28/debug-online-network/">debug online network</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/28/curl-info/">curl info</a>
+      </li>
+    
+      <li>
+        <a href="/2016/03/14/how-to-keep-two-sshkey/">如何使用双SSH KEY访问gitlab</a>
+      </li>
+    
+      <li>
+        <a href="/2016/02/16/nginx-limit/">nginx limit</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/30/mac-nginx-phpfpm/">mac下nginx开机启动&amp;phpfpm配置路径</a>
+      </li>
+    
+      <li>
+        <a href="/2016/01/28/homebrew_update_error/">homebrew升级报错</a>
       </li>
     
       <li>
         <a href="/2015/03/17/mac-dev/">mac下搭建Lamp环境</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/17/MalformedURLException/">Tomcat启动throws java.net.MalformedURLException</a>
       </li>
     
       <li>
@@ -216,30 +257,6 @@
         <a href="/2014/11/27/git-source-code/">Git源码导读</a>
       </li>
     
-      <li>
-        <a href="/2014/11/15/Design-login-system/">如何设计登录系统</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/10/druby-im-info-by-xmpp4r/">druby im info based on xmpp4r</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/xmpp-simple/">xmpp协议介绍</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/09/qtip2-default/">qtip2简明教程</a>
-      </li>
-    
-      <li>
-        <a href="/2014/11/08/god-father1-book/">God Father 书评</a>
-      </li>
-    
-      <li>
-        <a href="/2014/10/14/hello-world/">Hello World</a>
-      </li>
-    
   </ul>
 </div>
 
@@ -247,7 +264,7 @@
 </aside>
   <footer id="footer"><div class="copyright">
   
-  &copy; 2016 <a href="/">Edward Lv</a>
+  &copy; 2018 <a href="/">Edward Lv</a>
   
 </div>
 <div class="theme-copyright">

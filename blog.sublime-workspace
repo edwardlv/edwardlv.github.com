@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"h",
+				"hangzhou"
+			],
+			[
 				"json",
 				"json_decode"
 			],
@@ -119,14 +123,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "note/index.md",
-			"settings":
-			{
-				"buffer_size": 2281,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -135,8 +131,8 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 87.0,
-		"last_filter": "packgeconinstall",
+		"height": 392.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -167,17 +163,25 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/Users/edward/edwardlv.blog/source",
-		"/Users/edward/edwardlv.blog/source/about",
-		"/Users/edward/edwardlv.blog/source/hate",
-		"/Users/edward/edwardlv.blog/source/love",
-		"/Users/edward/edwardlv.blog/source/note",
-		"/Users/edward/project/pay_repay"
-	],
 	"file_history":
 	[
+		"/Users/edward/edwardlv.blog/source/_posts/how-to-delete-sublime-project.md",
+		"/Users/edward/edwardlv.blog/source/_posts/mac-dev.md",
+		"/Users/edward/edwardlv.blog/source/_posts/Design-login-system.md",
+		"/Users/edward/edwardlv.blog/source/_posts/curl-info.md",
+		"/Users/edward/Desktop/人员名单统计.php",
+		"/Users/edward/Desktop/diff.php",
+		"/Users/edward/Desktop/notexisted.txt",
+		"/Users/edward/Desktop/explode.txt",
+		"/Users/edward/Desktop/run.txt",
+		"/Users/edward/Desktop/ID_PW.txt",
+		"/Users/edward/Music/阿杜 - 天黑.cue",
+		"/Users/edward/edwardlv.blog/source/_posts/debug-online-network.md",
+		"/Users/edward/edwardlv.blog/source/_posts/how-to-keep-two-sshkey.md",
+		"/Users/edward/edwardlv.blog/source/_posts/nginx-limit.md",
+		"/Users/edward/edwardlv.blog/source/_posts/MalformedURLException.md",
+		"/Users/edward/edwardlv.blog/source/_posts/mac-nginx-phpfpm.md",
+		"/Users/edward/edwardlv.blog/source/_posts/homebrew_update_error.md",
 		"/Users/edward/edwardlv.blog/source/note/index.md",
 		"/Users/edward/project/pay_repay/util/JdbUtils.php",
 		"/Users/edward/project/pay_repay/util/JdbConsts.php",
@@ -288,24 +292,7 @@
 		"/Users/edward/project/paygent_sftp/resource/aaaaa.cert",
 		"/Users/edward/project/paygent_sftp/config/db.php",
 		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/db/Command.php",
-		"/Users/edward/project/paygent_sftp/controllers/拆单还款.txt",
-		"/Users/edward/project/pay_sftp/controller/app/wallet_controller.php",
-		"/Users/edward/project/paygent_sftp/components/PostSignAuth.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/web/ForbiddenHttpException.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/filters/AccessControl.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/di/Instance.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/filters/auth/QueryParamAuth.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/web/User.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/filters/auth/HttpBearerAuth.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/filters/auth/HttpBasicAuth.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/base/Request.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/base/Component.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/helpers/BaseArrayHelper.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/base/ActionFilter.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/db/Connection.php",
-		"/Users/edward/project/paygent_sftp/vendor/yiisoft/yii2/base/Controller.php",
-		"/Users/edward/project/paygent_sftp/components/RrxController.php",
-		"/Users/edward/project/paygent_sftp/components/GaoYangSdk.php"
+		"/Users/edward/project/paygent_sftp/controllers/拆单还款.txt"
 	],
 	"find":
 	{
@@ -316,6 +303,7 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/Users/edward/edwardlv.blog/source/_posts",
 			"/Users/edward/project/golang/push",
 			"/Users/edward/project/golang/push/src",
 			"/Users/edward/project/paygent_sftp",
@@ -332,6 +320,40 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"sublime",
+			"张云龙",
+			"胡涛",
+			"董立斌",
+			"黄垒",
+			"杨",
+			"钟",
+			"任",
+			"吴",
+			"洪",
+			"洪明",
+			"陈振",
+			"振",
+			"童",
+			"杜",
+			"袁",
+			"罗",
+			"郑",
+			"蒋",
+			"赵",
+			"黄",
+			"吴",
+			"郑",
+			"于",
+			"黎",
+			"龚",
+			"刘佳",
+			"吴春",
+			"朱",
+			"zhu'zhi'sheng",
+			"程",
+			" ",
+			"pay",
+			"nginx",
 			"nodeRepay",
 			"insert",
 			"font",
@@ -425,41 +447,7 @@
 			"Unable to verify your data submission",
 			"accSts",
 			"implode",
-			"bindCard",
-			"RSAVerify",
-			"RSASignUtil",
-			"parseRecv",
-			"-------",
-			"var_dump",
-			"RSAVerify",
-			"openssl_verify",
-			"关返回数据出错",
-			"exit",
-			"RSAVerify",
-			"verfyRet",
-			"setAlias",
-			"admin",
-			"sigWithdraw",
-			"sigCharge",
-			" ",
-			"site",
-			"defaultName",
-			"statusCode",
-			"der2pem",
-			"pem2der",
-			"hex2asc",
-			"asc2hex",
-			"hiMD",
-			"hiMDt",
-			"hiM",
-			"hiMD5",
-			"parseRecv",
-			"log",
-			"	",
-			"convertArray2String",
-			"LOANS",
-			"trans",
-			"link"
+			"bindCard"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -467,6 +455,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"+",
 			"        $sdk = $this->initSdk();",
 			"certPath",
 			"certPass",
@@ -497,46 +486,14 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "note/index.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2281,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								338,
-								338
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 21.0
+		"height": 25.0
 	},
 	"input":
 	{
@@ -573,11 +530,15 @@
 	{
 		"height": 433.0
 	},
+	"output.unsaved_changes":
+	{
+		"height": 27.0
+	},
 	"pinned_build_system": "",
 	"project": "blog.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -586,6 +547,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"sublime",
+				"_posts/how-to-delete-sublime-project.md"
+			],
+			[
+				"nginx",
+				"_posts/mac-nginx-phpfpm.md"
+			],
 			[
 				"jdbtaskli",
 				"pay_repay/models/JdbTaskLink.php"
@@ -959,10 +928,6 @@
 				"paygent_sftp/documents/paygent.sql"
 			],
 			[
-				"nginx",
-				"paygent_sftp/config/lyp.nginx.conf"
-			],
-			[
 				"rsau",
 				"merchant_sdk/common/RSASignUtil.class.php"
 			],
@@ -1093,10 +1058,6 @@
 			[
 				"component",
 				"paygent_sftp/vendor/yiisoft/yii2/base/Component.php"
-			],
-			[
-				"request",
-				"paygent_sftp/vendor/yiisoft/yii2/base/Request.php"
 			]
 		],
 		"width": 0.0
